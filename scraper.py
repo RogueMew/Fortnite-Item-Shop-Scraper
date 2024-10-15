@@ -72,7 +72,7 @@ def markDownItemShop()->None:
     print("Repo Commited")
     origin = repo.remote(name='origin') 
   
-    existing_branch = repo.heads['Testing'] 
+    existing_branch = repo.heads['main'] 
     existing_branch.checkout() 
     repo.index.commit(f"{getDate()} Item Shop")
     print('Commited successfully') 
