@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import json
-import pandas
+import git
 import datetime
 
 def getDate() -> str:
@@ -41,7 +41,8 @@ def markDownItemShop()->None:
                         'image' : item['image'].get('lg', 'None')
                     }
                     itemshop.append(item_dict)
-    MarkDown = open(f"{getDate()}-ItemShop.md", "w", encoding="utf-8") 
+    filename = f"Output/{getDate()}-ItemShop.md"
+    MarkDown = open(f"Output/{getDate()}-ItemShop.md", "w", encoding="utf-8") 
     catagory = ""
     section = ""
     for item in itemshop:
@@ -58,7 +59,21 @@ def markDownItemShop()->None:
         else:
             MarkDown.write(f"\n### {item['name']} - {item['price']}\n### Joined {item['inDate']} - Leaving {item['outDate']}\n   ![Image of Skin]({item['image']})")
     MarkDown.close()
-    print("Complete")
+    repo = git.Repo('C:/Users/ewklu/OneDrive/Desktop/Github_Repos/Fortnite-Item-Shop-Historical')
+    repo.index.add([filename])
+    print("File Added to Commit")
+    
+    print("Repo Commited")
+    origin = repo.remote(name='origin') 
+  
+    existing_branch = repo.heads['main'] 
+    existing_branch.checkout() 
+    repo.index.commit(f"{getDate()} Item Shop")
+    print('Commited successfully') 
+    origin.push() 
+    print("Completed Functions")
+    print("Closing app")
+    exit()
 
 
 markDownItemShop()
