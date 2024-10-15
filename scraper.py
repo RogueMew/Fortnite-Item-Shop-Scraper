@@ -14,9 +14,10 @@ def getDate() -> str:
 def updateReadMe() -> str:
     readme = open("README.md", "w", encoding="utf-8")
     readme.write("# Fortnite Item Shop Historical Viewer\n")
-    readme.write(f"## [Toadys shop as Markdown](https://github.com/RogueMew/Fortnite-Item-Shop-Historical/blob/main/Output/{getDate()}-ItemShop.md)- {getDate()}")
+    readme.write(f"## [Toadys Shop as Markdown](https://github.com/RogueMew/Fortnite-Item-Shop-Historical/blob/main/Output/{getDate()}-ItemShop.md)- {getDate()}")
     readme.close()
     return "README.md"
+
 def markDownItemShop()->None:
     driver = webdriver.Edge()
     driver.get("https://www.fortnite.com/item-shop?lang=en-US&_data=routes%2Fitem-shop._index")
