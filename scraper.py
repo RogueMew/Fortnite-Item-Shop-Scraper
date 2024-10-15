@@ -1,0 +1,64 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import json
+import pandas
+import datetime
+
+def getDate() -> str:
+    currentDateTime = datetime.datetime.now()
+    if int(datetime.datetime.now().strftime("%H")) >= 17 and int(datetime.datetime.now().strftime("%H")) <= 23:
+        currentDate = f'{currentDateTime.year}-{currentDateTime.month}-{str(currentDateTime.day+1)}'
+    else:
+        currentDate = f'{currentDateTime.year}-{currentDateTime.month}-{currentDateTime.day}'
+    return currentDate
+
+def markDownItemShop()->None:
+    driver = webdriver.Edge()
+    driver.get("https://www.fortnite.com/item-shop?lang=en-US&_data=routes%2Fitem-shop._index")
+    content = json.loads(driver.find_element(By.CSS_SELECTOR, 'div[hidden="true"]').get_attribute('textContent'))
+    driver.close()
+    itemshop = []
+    for catagory in content['catalog']['categories']:
+        for section in catagory['sections']:
+            for offer in section['offerGroups']:
+                newtoShop = None
+                leavingSoon = None
+                inDate = offer.get('inDate', None)
+                outDate = offer.get('outDate', None)
+                for item in offer['items']:
+                    if not inDate:
+                        inDate = item.get('inDate', 'UnkownT')
+                    if not outDate:
+                        outDate = item.get('outDate', 'UnkownT')
+                    item_dict = {
+                        "name" : item['title'],
+                        'catagory' : catagory['navLabel'],
+                        'section' : section['displayName'],
+                        'type' : item['assetType'],
+                        'price' : str(item['pricing']['finalPrice']) + " vbucks",
+                        'inDate' : inDate.split("T")[0],
+                        'outDate' : outDate.split("T")[0],
+                        'image' : item['image'].get('lg', 'None')
+                    }
+                    itemshop.append(item_dict)
+    MarkDown = open(f"{getDate()}-ItemShop.md", "w", encoding="utf-8") 
+    catagory = ""
+    section = ""
+    for item in itemshop:
+        if catagory != item["catagory"]:
+            catagory = item["catagory"]
+            MarkDown.write(f"\n# {item["catagory"]}")
+        if section != item["section"]:
+            section = item["section"]
+            MarkDown.write(f"\n## {item["section"]}")
+        if item['inDate'] == getDate():
+            MarkDown.write(f"\n### ***NEW*** {item['name']} - {item['price']}\n### Joined {item['inDate']} - Leaving {item['outDate']}\n   ![Image of Skin]({item['image']})")
+        elif item['outDate'] == getDate():
+            MarkDown.write(f"\n### ***LEAVING*** {item['name']} - {item['price']}\n### Joined {item['inDate']} - Leaving {item['outDate']}\n   ![Image of Skin]({item['image']})")
+        else:
+            MarkDown.write(f"\n### {item['name']} - {item['price']}\n### Joined {item['inDate']} - Leaving {item['outDate']}\n   ![Image of Skin]({item['image']})")
+    MarkDown.close()
+    print("Complete")
+
+
+markDownItemShop()
