@@ -11,6 +11,15 @@ def getDate() -> str:
     else:
         currentDate = f'{currentDateTime.year}-{currentDateTime.month}-{currentDateTime.day}'
     return currentDate
+<<<<<<< Updated upstream
+=======
+def updateReadMe() -> str:
+    readme = open("README.md", "w", encoding="utf-8")
+    readme.write("# Fortnite Item Shop Historical Viewer\n")
+    readme.write(f"## [Toadys Shop as Markdown](https://github.com/RogueMew/Fortnite-Item-Shop-Historical/blob/main/Markdown/{getDate()}-ItemShop.md)- {getDate()}")
+    readme.close()
+    return "README.md"
+>>>>>>> Stashed changes
 
 def markDownItemShop()->None:
     driver = webdriver.Edge()
