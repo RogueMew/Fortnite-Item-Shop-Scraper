@@ -11,7 +11,12 @@ def getDate() -> str:
     else:
         currentDate = f'{currentDateTime.year}-{currentDateTime.month}-{currentDateTime.day}'
     return currentDate
-
+def updateReadMe() -> str:
+    readme = open("README.md", "w", encoding="utf-8")
+    readme.write("# Fortnite Item Shop Historical Viewer\n")
+    readme.write(f"## [Toadys shop as Markdown](https://github.com/RogueMew/Fortnite-Item-Shop-Historical/blob/main/Output/{getDate()}-ItemShop.md)- {getDate()}")
+    readme.close()
+    return "README.md"
 def markDownItemShop()->None:
     driver = webdriver.Edge()
     driver.get("https://www.fortnite.com/item-shop?lang=en-US&_data=routes%2Fitem-shop._index")
@@ -21,8 +26,6 @@ def markDownItemShop()->None:
     for catagory in content['catalog']['categories']:
         for section in catagory['sections']:
             for offer in section['offerGroups']:
-                newtoShop = None
-                leavingSoon = None
                 inDate = offer.get('inDate', None)
                 outDate = offer.get('outDate', None)
                 for item in offer['items']:
@@ -41,8 +44,8 @@ def markDownItemShop()->None:
                         'image' : item['image'].get('lg', 'None')
                     }
                     itemshop.append(item_dict)
-    filename = f"Output/{getDate()}-ItemShop.md"
-    MarkDown = open(f"Output/{getDate()}-ItemShop.md", "w", encoding="utf-8") 
+    filename = f"Markdown/{getDate()}-ItemShop.md"
+    MarkDown = open(f"Markdown/{getDate()}-ItemShop.md", "w", encoding="utf-8") 
     catagory = ""
     section = ""
     for item in itemshop:
@@ -60,7 +63,7 @@ def markDownItemShop()->None:
             MarkDown.write(f"\n### {item['name']} - {item['price']}\n### Joined {item['inDate']} - Leaving {item['outDate']}\n   ![Image of Skin]({item['image']})")
     MarkDown.close()
     repo = git.Repo('C:/Users/ewklu/OneDrive/Desktop/Github_Repos/Fortnite-Item-Shop-Historical')
-    repo.index.add([filename])
+    repo.index.add([filename, updateReadMe()])
     print("File Added to Commit")
     
     print("Repo Commited")
@@ -74,6 +77,5 @@ def markDownItemShop()->None:
     print("Completed Functions")
     print("Closing app")
     exit()
-
 
 markDownItemShop()
