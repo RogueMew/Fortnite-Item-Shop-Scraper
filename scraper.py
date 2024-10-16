@@ -1,8 +1,10 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import requests as web
 import json
 import git
 import datetime
+import os
 
 def getDate() -> str:
     currentDateTime = datetime.datetime.now()
@@ -18,6 +20,12 @@ def checkSameDate(date) -> bool:
 def capFirst(string) ->str:
     return string[0].upper() + string[1:]
 
+def imageDownload(url, name):
+    if os.path.isdir(f'./images/{getDate()}') == False:
+        os.mkdir(f'./images/{getDate()}')
+    with open('images/' + f'{getDate()}/' + name.replace(' ', '-').replace('|', '-') + '.png', "wb") as f:
+        f.write(web.get(url).content)
+
 def updateReadMe() -> str:
     readme = open("README.md", "w", encoding="utf-8")
     readme.write("# Fortnite Item Shop Historical Viewer\n")
@@ -30,7 +38,7 @@ def scraping()->None:
     driver.get("https://www.fortnite.com/item-shop?lang=en-US&_data=routes%2Fitem-shop._index")
     content = json.loads(driver.find_element(By.CSS_SELECTOR, 'div[hidden="true"]').get_attribute('textContent'))
     driver.close()
-    print("Scraped Site, Compiling into Markdown")
+    print("Scraped Site, Compiling into Markdown and Downloading images")
     itemshop = []
     for catagory in content['catalog']['categories']:
         for section in catagory['sections']:
@@ -51,7 +59,8 @@ def scraping()->None:
                         'inDate' : inDate.split("T")[0],
                         'outDate' : outDate.split("T")[0],
                         'image' : item['image'].get('lg', None),
-                        'urlExstension' : item.get('urlName', None) 
+                        'urlExstension' : item.get('urlName', None),
+                        'imageLocal' : item['title'].replace(' ', '-').replace('|', '-') + '.png'
                     }
                     if item_dict['type'] == 'Dynamicbundle':item_dict['type'] = 'Bundle'
                     if item_dict['type'] == 'Vmtpack':item_dict['type'] = 'Pack'
@@ -63,21 +72,30 @@ def scraping()->None:
     catagory = ""
     section = ""
     for item in itemshop:
+        
         if catagory != item["catagory"]:
             catagory = item["catagory"]
             MarkDown.write(f"\n# {item["catagory"]}")
+        
         if section != item["section"]:
             section = item["section"]
             MarkDown.write(f"\n## {item["section"]}")
+        
+                
+        if item['image'] != None:
+            imageDownload(item['image'], item['name'])
+        
         if item['type'] == 'Rmtpack':
             MarkDown.write(f'\n### {item['name']} - Costs Real Money\n[Link to {item['name']} in the Epic Games Stor]({item['urlExstension']})')
+
         elif item['image'] != None and item['urlExstension'] != None:
             if checkSameDate(item['inDate']):
-                MarkDown.write(f'\n### **NEW** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[![Image of {item['name']}]({item['image']})](https://www.fortnite.com/item-shop/{item['type'] + 's'}/{item['urlExstension']}?lang=en-US)')
+                MarkDown.write(f'\n### **NEW** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[![Image of {item['name']}](../images/{getDate()}/{item['imageLocal']})](https://www.fortnite.com/item-shop/{item['type'] + 's'}/{item['urlExstension']}?lang=en-US)')
             elif checkSameDate(item['outDate']):
-                MarkDown.write(f'\n### **LEAVING NEXT ROTATION** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[![Image of {item['name']}]({item['image']})](https://www.fortnite.com/item-shop/{item['type'] +'s'}/{item['urlExstension']}?lang=en-US)')
+                MarkDown.write(f'\n### **LEAVING NEXT ROTATION** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[![Image of {item['name']}](../images/{getDate()}/{item['imageLocal']})](https://www.fortnite.com/item-shop/{item['type'] +'s'}/{item['urlExstension']}?lang=en-US)')
             else:
-                MarkDown.write(f'\n### {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[![Image of {item['name']}]({item['image']})](https://www.fortnite.com/item-shop/{item['type'] + 's'}/{item['urlExstension']}?lang=en-US)')
+                MarkDown.write(f'\n### {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[![Image of {item['name']}](../images/{getDate()}/{item['imageLocal']})](https://www.fortnite.com/item-shop/{item['type'] + 's'}/{item['urlExstension']}?lang=en-US)')
+        
         elif item['image'] == None and item['urlExstension'] != None:
             if checkSameDate(item['inDate']):
                 MarkDown.write(f'\n### **NEW** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[Link to {item['name']} in the webshop](https://www.fortnite.com/item-shop/{item['type'] + 's'}/{item['urlExstension']}?lang=en-US)')
@@ -85,13 +103,14 @@ def scraping()->None:
                 MarkDown.write(f'\n### **LEAVING NEXT ROTATION** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[Link to {item['name']} in the webshop](https://www.fortnite.com/item-shop/{item['type'] + 's'}/{item['urlExstension']}?lang=en-US)')
             else:
                 MarkDown.write(f'\n### {item['name']} - {item['price']} - {item['type']} -  Leaving: {item['outDate']}\n[Link to {item['name']} in the webshop](https://www.fortnite.com/item-shop/{item['type'] + 's'}/{item['urlExstension']}?lang=en-US)')
+        
         elif item['image'] != None and item['urlExstension'] == None:
             if checkSameDate(item['inDate']):
-                MarkDown.write(f'\n### **NEW** {item['name']} - {item['price']} - {item['type']} -  Leaving: {item['outDate']}\n![Image of {item['name']}]({item['image']})')
+                MarkDown.write(f'\n### **NEW** {item['name']} - {item['price']} - {item['type']} -  Leaving: {item['outDate']}\n![Image of {item['name']}](../images/{getDate()}/{item['imageLocal']})')
             elif checkSameDate(item['outDate']):
-                MarkDown.write(f'\n### **LEAVING NEXT ROTATION** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n![Image of {item['name']}]({item['image']})')
+                MarkDown.write(f'\n### **LEAVING NEXT ROTATION** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n![Image of {item['name']}](../images/{getDate()}/{item['imageLocal']})')
             else:
-                MarkDown.write(f'\n### {item['name']} - {item['price']} - {item['type']} -  Leaving: {item['outDate']}\n![Image of {item['name']}]({item['image']})')
+                MarkDown.write(f'\n### {item['name']} - {item['price']} - {item['type']} -  Leaving: {item['outDate']}\n![Image of {item['name']}](../images/{getDate()}/{item['imageLocal']})')
     MarkDown.close()
     print("Completed Compiling Markdown File")
     repo = git.Repo('C:/Users/ewklu/OneDrive/Desktop/Github_Repos/Fortnite-Item-Shop-Historical')
