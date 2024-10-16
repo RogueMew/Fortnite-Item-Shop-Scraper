@@ -114,7 +114,7 @@ def scraping()->None:
     MarkDown.close()
     print("Completed Compiling Markdown File")
     repo = git.Repo('C:/Users/ewklu/OneDrive/Desktop/Github_Repos/Fortnite-Item-Shop-Historical')
-    repo.index.add([filename, updateReadMe()])
+    repo.index.add([filename, updateReadMe(), 'images/' + f'{getDate()}'])
     print("File Added to Commit")
     
     print("Repo Commited")
@@ -125,7 +125,7 @@ def scraping()->None:
     repo.index.commit(f"{getDate()} Item Shop")
     print('Commited successfully') 
     origin.push() 
-    print("Completed Functions")
+    print("Completed Push to Orgin")
     print("Closing app")
     exit()
 
