@@ -58,8 +58,8 @@ def markDownItemShop()->None:
                     if item_dict['type'] == 'Jamtrack':item_dict['type'] = 'Jam-Track'
                     if item_dict['type'] == 'Legokits': item_dict['type'] = 'Lego-Kit'
                     itemshop.append(item_dict)
-    MarkDown = open(f"{getDate()}-ItemShop.md", "w", encoding="utf-8") 
-    filename = f"{getDate()}-ItemShop.md"
+    MarkDown = open(f"Markdown/{getDate()}-ItemShop.md", "w", encoding="utf-8") 
+    filename = f"Markdown/{getDate()}-ItemShop.md"
     catagory = ""
     section = ""
     for item in itemshop:
@@ -101,7 +101,7 @@ def markDownItemShop()->None:
     print("Repo Commited")
     origin = repo.remote(name='origin') 
   
-    existing_branch = repo.heads['Main'] 
+    existing_branch = repo.heads['main'] 
     existing_branch.checkout() 
     repo.index.commit(f"{getDate()} Item Shop")
     print('Commited successfully') 
