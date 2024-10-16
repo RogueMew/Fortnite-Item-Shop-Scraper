@@ -25,7 +25,7 @@ def updateReadMe() -> str:
     readme.close()
     return "README.md"
 
-def markDownItemShop()->None:
+def scraping()->None:
     driver = webdriver.Edge()
     driver.get("https://www.fortnite.com/item-shop?lang=en-US&_data=routes%2Fitem-shop._index")
     content = json.loads(driver.find_element(By.CSS_SELECTOR, 'div[hidden="true"]').get_attribute('textContent'))
@@ -110,4 +110,4 @@ def markDownItemShop()->None:
     print("Closing app")
     exit()
 
-markDownItemShop()
+scraping()
