@@ -21,7 +21,7 @@ def capFirst(string) ->str:
 def updateReadMe() -> str:
     readme = open("README.md", "w", encoding="utf-8")
     readme.write("# Fortnite Item Shop Historical Viewer\n")
-    readme.write(f"## [Toadys Shop as Markdown](https://github.com/RogueMew/Fortnite-Item-Shop-Historical/blob/main/Output/{getDate()}-ItemShop.md)- {getDate()}")
+    readme.write(f"## [Toadys Shop as Markdown](https://github.com/RogueMew/Fortnite-Item-Shop-Historical/blob/main/Markdown/{getDate()}-ItemShop.md)- {getDate()}")
     readme.close()
     return "README.md"
 
