@@ -151,9 +151,6 @@ def scraping()->None:
     existing_branch.checkout() 
     repo.index.commit(f"Update .gitignore")
     origin.push()
-
-    deleteItemsinFolder(getDate())
-
     print("Closing app")
     exit()
 
