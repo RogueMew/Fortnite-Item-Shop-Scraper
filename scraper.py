@@ -124,33 +124,20 @@ def scraping()->None:
                 MarkDown.write(f'\n### {item['name']} - {item['price']} - {item['type']} -  Leaving: {item['outDate']}\n![Image of {item['name']}](../images/{getDate()}/{item['imageLocal']})')
     MarkDown.close()
     
-    print("Completed Compiling Markdown File")
+    print("Completed Compiling Markdown File, Adding to Repo")
     
     repo = git.Repo('C:/Users/ewklu/OneDrive/Desktop/Github_Repos/Fortnite-Item-Shop-Historical')
     repo.index.add([filename, updateReadMe(), 'images/' + f'{getDate()}'])
-    
-    print("File Added to Commit")
-    print("Repo Commited")
-    
     origin = repo.remote(name='origin') 
     existing_branch = repo.heads['main'] 
     existing_branch.checkout() 
     repo.index.commit(f"{getDate()} Item Shop")
     
-    print('Commited successfully') 
+    print('Commited successfully, Pushing to Orgin') 
     
     origin.push() 
     
-    print("Completed Push to Orgin, Deleting Images from Folder")
-    
-    updateGitIgnore(f'./images/{getDate()}')
-    
-    repo.index.add(['.gitignore'])
-    origin = repo.remote(name='origin') 
-    existing_branch = repo.heads['main'] 
-    existing_branch.checkout() 
-    repo.index.commit(f"Update .gitignore")
-    origin.push()
+    print("Completed Push to Orgin")
     print("Closing app")
     exit()
 
