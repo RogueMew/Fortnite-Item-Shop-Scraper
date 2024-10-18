@@ -86,6 +86,7 @@ def scraping()->None:
     for item in itemshop:
         if item['name'] == None or item['name'] == '':
             item['name'] = 'temp{}'.format(tempNumber)
+            item['imageLocal'] = 'temp{}'.format(tempNumber) + '.png'
             tempNumber = tempNumber + 1
         
         if catagory != item["catagory"]:
