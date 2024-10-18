@@ -62,7 +62,7 @@ def scraping()->None:
                     if not outDate:
                         outDate = item.get('outDate', 'UnkownT')
                     item_dict = {
-                        "name" : item['title'],
+                        "name" : item.get('title', None),
                         'catagory' : catagory['navLabel'],
                         'section' : section['displayName'],
                         'type' : capFirst(item['assetType']),
@@ -82,8 +82,11 @@ def scraping()->None:
     filename = f"Markdown/{getDate()}-ItemShop.md"
     catagory = ""
     section = ""
+    tempNumber = 1
     for item in itemshop:
-        
+        if item['name'] == None:
+            item['name'] = 'temp{}'.format(tempNumber)
+            tempNumber = tempNumber + 1
         if catagory != item["catagory"]:
             catagory = item["catagory"]
             MarkDown.write(f"\n# {item["catagory"]}")
