@@ -84,9 +84,10 @@ def scraping()->None:
     section = ""
     tempNumber = 1
     for item in itemshop:
-        if item['name'] == None:
+        if item['name'] == None or item['name'] == '':
             item['name'] = 'temp{}'.format(tempNumber)
             tempNumber = tempNumber + 1
+        
         if catagory != item["catagory"]:
             catagory = item["catagory"]
             MarkDown.write(f"\n# {item["catagory"]}")
