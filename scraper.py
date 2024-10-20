@@ -26,7 +26,7 @@ def capFirst(string) ->str:
 def imageDownload(url, name, date):
     if os.path.isdir(f'./images/{date}') == False:
         os.mkdir(f'./images/{date}')
-    with open('images/' + f'{date}/' + name.replace(' ', '-').replace('|', '-') + '.png', "wb") as f:
+    with open('images/' + f'{date}/' + name.replace(' ', '-').replace('|', '-').lower() + '.png', "wb") as f:
         f.write(web.get(url).content)
 
 def updateReadMe(date) -> str:
@@ -70,14 +70,15 @@ def scraper()-> list:
                         'image' : item['image'].get('lg', None),
                         'urlExstension' : item.get('urlName', None),
                         'rmtImage' : item['image'].get('wide', None),
-                        'imageLocal' : item['title'].replace(' ', '-').replace('|', '-') + '.png',
+                        'imageLocal' : item['title'].replace(' ', '-').replace('|', '-').lower() + '.png',
                         'hasVariants' : item.get('hasVariants', None)
                     }
-                    if item_dict['type'] == 'dynamicbundle' or item_dict['type'] == 'staticbundle':item_dict['type'] = 'bundle'
-                    if item_dict['type'] == 'vmtpack':item_dict['type'] = 'pack'
-                    if item_dict['type'] == 'jamtrack':item_dict['type'] = 'jam-Track'
-                    if item_dict['type'] == 'legokits': item_dict['type'] = 'lego-Kit'
-
+                    if item_dict['type'] == 'dynamicbundle': item_dict['type'] = 'bundle'
+                    elif item_dict['type'] == 'staticbundle': item_dict['type'] = 'bundle'
+                    elif item_dict['type'] == 'vmtpack': item_dict['type'] = 'pack'
+                    elif item_dict['type'] == 'jamtrack': item_dict['type'] = 'jam-track'
+                    elif item_dict['type'] == 'legokit': item_dict['type'] = 'lego-kit'
+                    elif item_dict['type'] == 'decor': item_dict['type'] = 'decor-bundle'
                     itemshop.append(item_dict)
     return itemshop
 
@@ -117,6 +118,7 @@ def main()->None:
     section = ""
     tempNumber = 1
     print('Compiling to Markdown and Downloading Images')
+    MarkDown.write(f'# Item Shop for {date}')
     for item in tqdm(itemshop, total=len(itemshop)):
         if item['name'] == None or item['name'] == '':
             item['name'] = 'temp{}'.format(tempNumber)
@@ -141,7 +143,7 @@ def main()->None:
         if 'temp' in item['name'] :
             item['name'] = 'Not Listed on Site'
         
-        if item['type'] == 'Rmtpack':
+        if item['type'] == 'rmtpack':
             #Link to {item['name']} in the Epic Games Store
             MarkDown.write(f'\n### {item['name']} - Costs Real Money\n[![Image of {item['name']}](../images/{date}/{item['imageLocal']})]({item['urlExstension']})')
 
