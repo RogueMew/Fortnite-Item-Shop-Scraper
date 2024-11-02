@@ -173,8 +173,7 @@ def main()->None:
     MarkDown.close()
     
     print("Completed Compiling Markdown File, Adding to Repo")
-    filesCommit = [filename, updateReadMe(date), f'images/{date}/']
-    commit(filesCommit)
+
     exit()
 
 main()
