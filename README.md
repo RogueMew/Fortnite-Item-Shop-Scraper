@@ -1,3 +1,3 @@
-# Fortnite Item Shop Historical Viewer | 2024-11-6
-## [Toadys Shop as Markdown](https://github.com/RogueMew/Fortnite-Item-Shop-Historical/blob/main/Markdown/2024-11-6-ItemShop.md)
-## [Todays Item Shop Images](https://github.com/RogueMew/Fortnite-Item-Shop-Historical/tree/main/images/2024-11-6)
+# Fortnite Item Shop Historical Viewer | 2024-11-7
+## [Toadys Shop as Markdown](https://github.com/RogueMew/Fortnite-Item-Shop-Historical/blob/main/Markdown/2024-11-7-ItemShop.md)
+## [Todays Item Shop Images](https://github.com/RogueMew/Fortnite-Item-Shop-Historical/tree/main/images/2024-11-7)
