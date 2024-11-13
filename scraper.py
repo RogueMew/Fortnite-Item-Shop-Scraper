@@ -147,32 +147,32 @@ def main()->None:
             MarkDown.write(f'\n### {item['name']} - Costs Real Money\n[![Image of {item['name']}](../images/{date}/{item['imageLocal']})]({item['urlExstension']})')
 
         elif item['image'] != None and item['urlExstension'] != None:
-            if checkSameDate(item['inDate']):
+            if checkSameDate(item['outDate']) and checkSameDate(item['inDate']):
+                MarkDown.write(f'\n### **NEW** **LEAVING NEXT ROTATION** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[![Image of {item['name']}](../images/{date}/{item['imageLocal']})](https://www.fortnite.com/item-shop/{item['type'] +'s'}/{item['urlExstension']}?lang=en-US)')
+            elif checkSameDate(item['inDate']):
                 MarkDown.write(f'\n### **NEW** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[![Image of {item['name']}](../images/{date}/{item['imageLocal']})](https://www.fortnite.com/item-shop/{item['type'] + 's'}/{item['urlExstension']}?lang=en-US)')
             elif checkSameDate(item['outDate']):
                 MarkDown.write(f'\n### **LEAVING NEXT ROTATION** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[![Image of {item['name']}](../images/{date}/{item['imageLocal']})](https://www.fortnite.com/item-shop/{item['type'] +'s'}/{item['urlExstension']}?lang=en-US)')
-            elif checkSameDate(item['outDate']) and checkSameDate(item['inDate']):
-                MarkDown.write(f'\n### **NEW** **LEAVING NEXT ROTATION** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[![Image of {item['name']}](../images/{date}/{item['imageLocal']})](https://www.fortnite.com/item-shop/{item['type'] +'s'}/{item['urlExstension']}?lang=en-US)')
             else:
                 MarkDown.write(f'\n### {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[![Image of {item['name']}](../images/{date}/{item['imageLocal']})](https://www.fortnite.com/item-shop/{item['type'] + 's'}/{item['urlExstension']}?lang=en-US)')
         
         elif item['image'] == None and item['urlExstension'] != None:
-            if checkSameDate(item['inDate']):
+            if checkSameDate(item['outDate']) and checkSameDate(item['inDate']):
+                MarkDown.write(f'\n### **NEW** **LEAVING NEXT ROTATION** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[Link to {item['name']} in the webshop](https://www.fortnite.com/item-shop/{item['type'] + 's'}/{item['urlExstension']}?lang=en-US)')
+            elif checkSameDate(item['inDate']):
                 MarkDown.write(f'\n### **NEW** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[Link to {item['name']} in the webshop](https://www.fortnite.com/item-shop/{item['type'] + 's'}/{item['urlExstension']}?lang=en-US)')
             elif checkSameDate(item['outDate']):
                 MarkDown.write(f'\n### **LEAVING NEXT ROTATION** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[Link to {item['name']} in the webshop](https://www.fortnite.com/item-shop/{item['type'] + 's'}/{item['urlExstension']}?lang=en-US)')
-            elif checkSameDate(item['outDate']) and checkSameDate(item['inDate']):
-                MarkDown.write(f'\n### **NEW** **LEAVING NEXT ROTATION** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n[Link to {item['name']} in the webshop](https://www.fortnite.com/item-shop/{item['type'] + 's'}/{item['urlExstension']}?lang=en-US)')
             else:
                 MarkDown.write(f'\n### {item['name']} - {item['price']} - {item['type']} -  Leaving: {item['outDate']}\n[Link to {item['name']} in the webshop](https://www.fortnite.com/item-shop/{item['type'] + 's'}/{item['urlExstension']}?lang=en-US)')
         
         elif item['image'] != None and item['urlExstension'] == None:
-            if checkSameDate(item['inDate']):
+            if checkSameDate(item['outDate']) and checkSameDate(item['inDate']):
+                MarkDown.write(f'\n### **NEW** **LEAVING NEXT ROTATION** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n![Image of {item['name']}](../images/{date}/{item['imageLocal']})')
+            elif checkSameDate(item['inDate']):
                 MarkDown.write(f'\n### **NEW** {item['name']} - {item['price']} - {item['type']} -  Leaving: {item['outDate']}\n![Image of {item['name']}](../images/{date}/{item['imageLocal']})')
             elif checkSameDate(item['outDate']):
                 MarkDown.write(f'\n### **LEAVING NEXT ROTATION** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n![Image of {item['name']}](../images/{date}/{item['imageLocal']})')
-            elif checkSameDate(item['outDate']) and checkSameDate(item['inDate']):
-                MarkDown.write(f'\n### **NEW** **LEAVING NEXT ROTATION** {item['name']} - {item['price']} -  Leaving: {item['outDate']}\n![Image of {item['name']}](../images/{date}/{item['imageLocal']})')
             else:
                 MarkDown.write(f'\n### {item['name']} - {item['price']} - {item['type']} -  Leaving: {item['outDate']}\n![Image of {item['name']}](../images/{date}/{item['imageLocal']})')
     MarkDown.close()
