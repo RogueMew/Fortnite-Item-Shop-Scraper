@@ -83,7 +83,7 @@ def scraper()-> list:
     return itemshop
 
 def commit(files) ->None:
-    repo = git.Repo('C:/Users/ewklu/OneDrive/Desktop/Github_Repos/Fortnite-Item-Shop-Historical')
+    repo = git.Repo('C:\Users\ewklu\Desktop\github_repos\Fortnite-Item-Shop-Historical')
     repo.index.add(files)
     origin = repo.remote(name='origin') 
     existing_branch = repo.heads['main'] 

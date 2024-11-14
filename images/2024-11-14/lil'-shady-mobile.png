@@ -1,0 +1,192 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>@media screen and (max-width:374px){h1{font-size:18px}.cf_challenge_container{margin:25px;padding:25px}.cf_challenge_text{font-size:16px}}@media screen and (min-width:375px) and (max-width:1279px){h1{font-size:30px}.cf_challenge_container{margin:25px;padding:60px}.cf_challenge_text{font-size:16px}}@media screen and (min-width:1280px){h1{font-size:40px}.cf_challenge_container{margin:25px;padding:60px}.cf_challenge_text{font-size:18px}}@media screen and (min-width:1920px){h1{font-size:50px}}.cf_challenge_text_small{font-size:11px}*,:after :before{-webkit-font-smoothing:antialiased;-webkit-touch-callout:none;-moz-osx-font-smoothing:grayscale;box-sizing:border-box;text-size-adjust:100%}body{height:100vh;width:100vw;overflow-x:hidden;font-family:sans-serif;font-weight:400;font-size:14px;line-height:20px;letter-spacing:.2px;color:hsla(0,0%,100%,.5);margin:0;background:#121212;display:flex;flex-direction:column;justify-content:center;align-items:center}.logo{padding-bottom:25px}.logo,section{display:flex;align-items:center;flex-direction:column;text-align:center}h1,p{font-family:Brutal,sans-serif;font-weight:400;padding:0;margin:0}h1{line-height:34px;text-align:center;letter-spacing:-.5px;color:#fff;margin:0 0 20px}p{font-size:14px;line-height:20px;letter-spacing:.2px;color:hsla(0,0%,100%,.5)}strong{font-weight:400;color:#fff}.cf_challenge_container{max-width:430px;min-width:200px;background-color:#202020;font-family:sans-serif;line-height:normal;overflow:auto}.cf_challenge,.cf_challenge_container{display:flex;justify-content:center;flex-direction:column}.cf_challenge{text-align:center;margin:25px 0}.cf_challenge_container hr{border-bottom:0;max-width:500px;opacity:.25}.cf_close_button{background:transparent;border-radius:4px;color:#fff;cursor:pointer;padding:5px;position:absolute;right:15px;top:10px;transition:.1s}.cf_close_button:hover{background:#3b3b3b}.cf_error_container button{background:transparent;border:1px solid #000;border-radius:4px;color:#000;cursor:pointer;font-family:sans-serif;font-weight:700;margin:5px;padding:14px 22px}.cf_error_container p{color:#000;font-family:sans-serif;font-size:14px;margin:20px}.cf_error_container{align-items:flex-start;background:#ffa640;border-radius:4px;display:none;justify-content:space-between;margin:auto auto 8px;text-align:left;width:500px}.cf_logo{margin:0 auto;width:41px}</style>
+    <script type="application/javascript">
+        const localeStrings = {
+            ar: {
+                challengeTitle: 'خطوة واحدة إضافية',
+                challengeSubtitle: 'يُرجى إكمال فحص الأمان للمتابعة',
+                sessionId: 'مُعرّف الجلسة',
+                ipAddress: 'عنوان IP',
+            },
+            de: {
+                challengeTitle: 'Ein letzter Schritt',
+                challengeSubtitle: 'Bitte führe eine Sicherheitskontrolle aus, um fortzufahren.',
+                sessionId: 'Sitzungs-ID',
+                ipAddress: 'IP-Adresse',
+            },
+            en: {
+                challengeTitle: 'One More Step',
+                challengeSubtitle: 'Please complete a security check to continue',
+                sessionId: 'Session ID',
+                ipAddress: 'IP Address',
+            },
+            'es-ES': {
+                challengeTitle: 'Un paso más',
+                challengeSubtitle: 'Completa el control de seguridad para continuar',
+                sessionId: 'ID de sesión',
+                ipAddress: 'Dirección IP',
+            },
+            'es-MX': {
+                challengeTitle: 'Un paso más',
+                challengeSubtitle: 'Completa el control de seguridad para continuar',
+                sessionId: 'ID de sesión',
+                ipAddress: 'Dirección IP',
+            },
+            fr: {
+                challengeTitle: 'Encore une étape',
+                challengeSubtitle: "Remplissez l'enquête de sécurité pour continuer",
+                sessionId: 'ID de session',
+                ipAddress: 'Adresse IP',
+            },
+            it: {
+                challengeTitle: 'Ancora un passo da compiere',
+                challengeSubtitle: 'Completa un controllo di sicurezza per continuare',
+                sessionId: 'ID della sessione',
+                ipAddress: 'Indirizzo IP',
+            },
+            ja: {
+                challengeTitle: 'あともう1ステップ',
+                challengeSubtitle: '継続するにはセキュリティチェックを完了してください',
+                sessionId: 'セッションID',
+                ipAddress: 'IPアドレス',
+            },
+            ko: {
+                challengeTitle: '한 단계가 더 남았습니다',
+                challengeSubtitle: '계속하려면 보안 검사를 완료해주세요',
+                sessionId: '세션 ID',
+                ipAddress: 'IP 주소',
+            },
+            pl: {
+                challengeTitle: 'Jeszcze jeden krok',
+                challengeSubtitle: 'Przeprowadź kontrolę bezpieczeństwa, by kontynuować',
+                sessionId: 'Identyfikator sesji',
+                ipAddress: 'Adres IP',
+            },
+            'pt-BR': {
+                challengeTitle: 'Mais uma etapa',
+                challengeSubtitle: 'Complete uma verificação de segurança para continuar',
+                sessionId: 'ID da sessão',
+                ipAddress: 'Endereço IP',
+            },
+            ru: {
+                challengeTitle: 'Ещё один шаг',
+                challengeSubtitle: 'Перед тем как продолжить, завершите проверку безопасности',
+                sessionId: 'Идентификатор сеанса',
+                ipAddress: 'IP-адрес',
+            },
+            th: {
+                challengeTitle: 'อีกขั้นตอนเดียวเท่านั้น',
+                challengeSubtitle: 'โปรดทำการตรวจสอบความปลอดภัยให้เสร็จเพื่อดำเนินการต่อ',
+                sessionId: 'ID เซสชัน',
+                ipAddress: 'ที่อยู่ IP',
+            },
+            tr: {
+                challengeTitle: 'Son Bir Adım Daha',
+                challengeSubtitle: 'Devam etmek için lütfen bir güvenlik kontrolünü tamamla',
+                sessionId: 'Oturum NO',
+                ipAddress: 'IP Adresi',
+            },
+            'zh-CN': {
+                challengeTitle: '再进行一步操作',
+                challengeSubtitle: '请完成安全检查以继续',
+                sessionId: '会话 ID',
+                ipAddress: 'IP 地址',
+            },
+            'zh-TW': {
+                challengeTitle: '再一個步驟',
+                challengeSubtitle: '請完成安全性確認以繼續',
+                sessionId: '階段 ID',
+                ipAddress: 'IP 位址',
+            }
+        }
+
+        const getLocaleStrings = (locale = 'en') => {
+            switch (locale.toLowerCase()) {
+                case 'ar':
+                    return localeStrings.ar;
+                case 'de-de':
+                case 'de':
+                    return localeStrings.de;
+                case 'en-us':
+                case 'en':
+                    return localeStrings.en;
+                case 'es-es':
+                    return localeStrings["es-ES"];
+                case 'es-mx':
+                    return localeStrings["es-MX"];
+                case 'fr':
+                case 'fr-fr':
+                    return localeStrings.fr;
+                case 'it':
+                case 'it-it':
+                    return localeStrings.it;
+                case 'ja':
+                case 'ja-jp':
+                    return localeStrings.ja;
+                case 'ko':
+                case 'ko-kr':
+                    return localeStrings.ko;
+                case 'pl':
+                    return localeStrings.pl;
+                case 'pt':
+                case 'pt-br':
+                    return localeStrings["pt-BR"];
+                case 'ru':
+                case 'ru-ru':
+                    return localeStrings.ru;
+                case 'th':
+                    return localeStrings.th;
+                case 'tr':
+                    return localeStrings.tr;
+                case 'zh':
+                case 'zh-cn':
+                    return localeStrings["zh-CN"];
+                case 'zh-tw':
+                    return localeStrings["zh-TW"]
+                default: {
+                    const hyphIndex = locale.indexOf('-');
+                    const localeSub = locale.substring(0, hyphIndex);
+                    if (hyphIndex > -1) {
+                        return getLocaleStrings(localeSub);
+                    } else {
+                        return localeStrings.en;
+                    }
+                }
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const els = document.querySelectorAll('[data-t]');
+            els.forEach((el) => {
+                const tKey = el.getAttribute('data-t');
+                const locale = window.navigator.language;
+                const loc = getLocaleStrings(locale);
+                el.innerText = loc[tKey];
+            })
+        });
+    </script>
+<meta http-equiv="refresh" content="390">
+</head>
+<body>
+<div class="cf_challenge_container">
+    <div class="cf_challenge_section">
+        <div class="logo">
+            <img class="cf_logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB3aWR0aD0iODgiCiAgIGhlaWdodD0iMTA0IgogICB2aWV3Qm94PSIwIDAgODggMTA0IgogICBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ0cnVlIgogICB2ZXJzaW9uPSIxLjEiPgogIDxwYXRoCiAgICAgZmlsbD0iI2ZmZiIKICAgICBkPSJNNy44OTYgMGg3Mi4yMDJjNS43NjcgMCA3Ljg5NiAyLjE3OCA3Ljg5NiA4LjA4MXY3MS4yMzJjMCAuNjcgMCA1LjI5LTQuNTI5IDcuNzMyLTMuMDIgMS42MjctMTQuODMyIDYuNjMzLTM1LjQzNyAxNS4wMTgtMS44Mi44NTQtMi42OTkgMS4wNzUtNC4wMyAxLjA1LTEuNDk2IDAtMi4wNTctLjIwMi00LjA1LTEuMDVDMTkuMzU3IDkzLjQwNyA3LjU1MSA4OC40IDQuNTMgODcuMDQ1IDAgODUuMDEuMjE1IDgyLjQ2NS4wODMgODEuMTc3QTE4Ljc4MSAxOC43ODEgMCAwIDEgMCA3OS4zMTNWOC4wODFDMCAyLjE3OCAyLjEyOSAwIDcuODk2IDB6bTY2LjA4OSA3Mi42MDRMNzQgNzIuNDN2LS4zODFsLS4wMTUtLjE3NC0uMDE3LS4xNTktLjA2NC0uMzE4LS4wMzItLjE0Mi0uMDQ3LS4xNDMtLjA1LS4xNDQtLjA2My0uMTI2LS4wODEtLjE0NC0uMDgxLS4xMjYtLjA5Ni0uMTQyLS4wOTYtLjEyOC0uMTEzLS4xMS0uMTEzLS4xMjgtLjEyOC0uMTExLS4xMjgtLjExMS0uMTMtLjA4LS4xMjgtLjA5Ni0uMTI4LS4wNzgtLjE0NS0uMDgtLjE0NS0uMDc5LS4xNi0uMDgtLjE2Mi0uMDY0LS4xNi0uMDgtLjE3Ny0uMDYtLjE0NS0uMDQ5LS4xNDQtLjA0OC0uMTYyLS4wNDYtLjE0NC0uMDQ4LS4xNi0uMDQ4LS4xNi0uMDQ4LS4xNjMtLjAzMi0uMTc3LS4wNDgtLjE2LS4wNDYtLjE3Ny0uMDMzLS4xNzctLjA0Ny0uMTc3LS4wNDgtLjE3Ny0uMDQ4LS4xNi0uMDMxLS4xNDUtLjA0OC0uMTQ1LS4wMzItLjEyOC0uMDQ4LS4xMjgtLjAzMS0uMTk0LS4wNjMtLjE3Ny0uMDY1LS4xNi0uMDYzLS4xMjgtLjA3OS0uMTQ3LS4wOC0uMTExLS4xMS0uMDY2LS4wOTUtLjA3OS0uMTc1LS4wMTctLjIwNnYtLjAzM2wuMDE3LS4xNTcuMDY0LS4xNDQuMDk2LS4xNDMuMTQ1LS4xMjcuMTEzLS4wNjMuMTI4LS4wNjMuMTQ1LS4wMzIuMTYyLS4wMzMuMTc1LS4wMzFoLjM1NGwuMTQ1LjAxNi4xNjIuMDE1LjE2LjAxNy4xNi4wMzEuMTYuMDMyLjE2Mi4wMzEuMTYuMDQ4LjE2Mi4wNDguMTc2LjA0OC4xMy4wNjMuMTQ0LjA0OC4xMjguMDYzLjE0NS4wNjMuMTI5LjA2NS4xNDUuMDYzLjEyOC4wOC4xNDUuMDYyLjEzLjA5Ni4xMjcuMDguMTQ0LjA3OS4xMy4wOTUuMDk2LS4xMjYuMDgtLjEyOC4wOTctLjEyNy4wOTYtLjEyNi4wOTYtLjE0NC4wOC0uMTI2LjA5Ny0uMTI4LjA5OC0uMTI3LjA3OS0uMTI2LjA5Ni0uMTI4LjA5OC0uMTI3LjA4LS4xMjYuMDk1LS4xNDQuMDk4LS4xMjYuMDk2LS4xMjguMDgtLjEyNy4wOTctLjEyOC0uMTI4LS4wOTQtLjEyOC0uMDk1LS4xMy0uMDk2LS4xMjgtLjA4LS4xNDUtLjA5NC0uMTI4LS4wOC0uMTQ1LS4wNzktLjE0NS0uMDgtLjEyOC0uMDY0LS4xNDUtLjA3OC0uMTYyLS4wNjQtLjE0NC0uMDYzLS4xNDUtLjA2My0uMTQ0LS4wNDgtLjE2Mi0uMDY1LS4xNDQtLjAzMS0uMTQ1LS4wNDgtLjE2MS0uMDQ3LS4xNDQtLjAzMS0uMTYxLS4wMzMtLjE2LS4wMzItLjE0Ni0uMDMxLS4xNi0uMDMyLS4xNzctLjAxNi0uMTYtLjAzMi0uMTc4LS4wMTVoLS4xNmwtLjE3OC0uMDE2LS4xNzctLjAxN2gtLjY5bC0uMzIxLjAzMy0uMTYyLjAxNS0uMTYuMDE3LS4xNDUuMDMxLS4xNi4wMzItLjE0Ny4wMzEtLjE0My4wMzItLjEyOC4wMzMtLjE0Ny4wNDYtLjE2LjA2NS0uMTYuMDQ2LS4xNDUuMDY1LS4xNDUuMDgtLjE0NS4wNjItLjE0NS4wOC0uMTI4LjA4LS4xMjguMDk0LS4xMy4wOTYtLjExMS4wOC0uMTMuMTEtLjExMS4xMjgtLjExMy4xMS0uMTEzLjEyNy0uMDk2LjEyNy0uMDk2LjEyOC0uMDgxLjE0Mi0uMDguMTQzLS4wNjUuMTQ0LS4wNjQuMTQyLS4wNjQuMTQzLS4wMzIuMTQyLS4wNS4xNDQtLjA2My4yODUtLjAxNy4xNi0uMDE1LjE0Mi0uMDE3LjE1OXYuMzY2bC4wMTcuMTczLjAxNS4xNi4wMTcuMTU4LjAzMi4xNDMuMDMyLjE1OS4wNDkuMTI2LjA0Ny4xNDQuMDQ5LjEyNi4wNjQuMTEuMDguMTQzLjA4LjEyOC4wOC4xMS4wOTcuMTEyLjA5OC4xMS4xMTEuMTEyLjExMy4xMS4xMTMuMDk3LjEyOC4wOC4xMy4wOTQuMTQzLjA4LjEzLjA3OS4xNi4wOC4xNDUuMDc5LjE2LjA2My4xNjIuMDY0LjE2LjA2My4xNzcuMDYzLjE0NS4wNDguMTQ1LjA0OC4xNDMuMDQ4LjE2Mi4wMzIuMTQ1LjA0OC4xNi4wNDYuMTYuMDMyLjE2Mi4wNDguMTYuMDMxLjE3Ny4wNDguMTYyLjAzMi4xNzUuMDQ4LjE2Mi4wMzEuMTYuMDQ4LjE0NS4wMzIuMTQ1LjA0OC4xMjguMDMxLjExMy4wMzIuMTkzLjA3OS4xNjEuMDY1LjE0NS4wNjMuMTI4LjA2My4xMjkuMDk2LjExMi4wOTQuMDgxLjExMS4wNjQuMTU5LjAxNy4xOXYuMDMybC0uMDE3LjE1OS0uMDQ4LjE0Mi0uMDY0LjEyOC0uMDk3LjExLS4xMjguMDk3LS4xMTMuMDYzLS4xMy4wNDgtLjE0My4wMzEtLjE0NS4wMzItLjE2MS4wMzEtLjE3Ny4wMTdoLS4zNTNsLS4xNzctLjAxN2gtLjE2bC0uMTYyLS4wMzEtLjE3Ny0uMDE1LS4xNi0uMDMzLS4xNi0uMDMyLS4xNjItLjAzMS0uMTQ1LS4wNDgtLjE2LS4wNDctLjE2LS4wNDgtLjE0Ny0uMDYzLS4xNDMtLjA0OC0uMTQ1LS4wNjQtLjE0NS0uMDYzLS4xNDUtLjA2My0uMTI4LS4wOC0uMTQ1LS4wNjMtLjEyOC0uMDgtLjE0NS0uMDk1LS4xMy0uMDgtLjE0My0uMDk0LS4xMy0uMDk2LS4xNDMtLjA5Ni0uMTMtLjA5NS0uMDk2LjEyOC0uMTEzLjExMS0uMDk2LjEyNy0uMTEzLjEyNi0uMDk2LjExMS0uMDk2LjEyOC0uMTEzLjEyNy0uMDk2LjExMS0uMTEzLjEyNi0uMDk2LjExMy0uMTEzLjEyNi0uMDk2LjEyNy0uMDk2LjExMS0uMTEzLjEyOC0uMDk2LjEyNi0uMTEzLjExLS4wOTYuMTI4LjEyOC4xMTEuMTEzLjA5Ni4xMjguMDk1LjEyOC4wOTYuMTMuMDk0LjEyOC4wOTYuMTI4LjA4LjEyOC4wOC4xNDcuMDc5LjEyOC4wNzguMTQzLjA4LjE0Ny4wNjQuMTQzLjA3OC4xNDUuMDYzLjE0NS4wNjQuMTYuMDYzLjE0NS4wNDguMTYuMDQ4LjE0NS4wNjMuMTYyLjA0OC4xNi4wNDcuMTQ1LjAzMy4xNi4wNDYuMTYyLjAzMy4xNi4wMzIuMzIyLjA2My4xNi4wMTYuMTYyLjAzMi4xNzUuMDE1LjE2Mi4wMTYuMTYuMDE3aC4xNzdsLjE2LjAxNWguNjc2bC4xNi0uMDE1LjE3OC0uMDE3LjE2MS0uMDE2LjE0NS0uMDE1LjE2LS4wMTcuMTYyLS4wMzEuMTQ0LS4wMzIuMTQ1LS4wMzEuMTYtLjAzMi4xNDYtLjA0OC4xNi0uMDQ4LjE2LS4wNDguMTYtLjA2My4xNjMtLjA2My4xNDQtLjA4LjE0NC0uMDY0LjE0Ni0uMDguMTI5LS4wOTQuMTI4LS4wNzguMTI4LS4wOTYuMTEzLS4wOTQuMTI4LS4xMTMuMDk2LS4wOTQuMTEzLS4xMTEuMDk2LS4xMTEuMDgtLjEyOC4wOTctLjEyNy4xNjItLjI1NC4wNjQtLjE0Mi4wNjQtLjEyOC4wNjQtLjE0Mi4wNDktLjE2LjAzMi0uMTQyLjA0Ny0uMTU5LjAzNC0uMTU5LjAxNS0uMTc0LjAxNy0uMTU5em0tMTEuMjc3IDMuMTc0aC4xNjJ2LTIuNjE5aC02LjMwM3YtMS45NjdoNS41OTV2LTIuNDZoLTUuNTk1di0xLjg5aDYuMjIydi0yLjYyaC05LjI5M3YxMS41NTZoOS4yMTJ6bS0xMS43NDYgMGguMTZWNjQuMjIyaC0zLjI5NWwtLjA4MS4xMjctLjA4LjE0My0uMDk3LjEyNi0uMDgxLjE0NC0uMDguMTI2LS4wOC4xNDQtLjA5Ni4xMjYtLjA4MS4xNDItLjA4MS4xMjgtLjA4LjEyNi0uMDk2LjE0Mi0uMDguMTI4LS4wODEuMTQyLS4wODEuMTI4LS4wOTUuMTQtLjA4LjEyOC0uMDgyLjEyOC0uMDguMTQtLjA4LjEyOC0uMDk2LjE0My0uMDguMTI3LS4wODIuMTQxLS4wOC4xMjgtLjA5Ny4xNDItLjA3OS4xMjYtLjA4LjEyOC0uMDgyLjE0Mi0uMDk2LjEyOC0uMDguMTQyLS4wOC4xMjYtLjA4LjE0NC0uMDk3LjEyNi0uMDguMTQyLS4wODIuMTI4LS4wNzktLjEyOC0uMDgtLjE0Mi0uMDk5LS4xMjYtLjA3OS0uMTQ0LS4wOC0uMTI2LS4wOC0uMTQyLS4wOC0uMTI4LS4wOTktLjE0Mi0uMDc5LS4xMjgtLjA4LS4xMjYtLjA4LS4xNDItLjA4LS4xMjgtLjA5OS0uMTQtLjA3OS0uMTI4LS4wOC0uMTQzLS4wOC0uMTI3LS4wODEtLjE0MS0uMDk4LS4xMjgtLjA3OS0uMTI3LS4wOC0uMTQxLS4wODItLjEyOC0uMDk2LS4xNDItLjA4LS4xMjgtLjA4LS4xNDItLjA4LS4xMjYtLjA4Mi0uMTI4LS4wOTYtLjE0Mi0uMDgtLjEyNi0uMDgtLjE0NC0uMDgtLjEyNi0uMDgyLS4xNDQtLjA5Ni0uMTI2LS4wOC0uMTQzLS4wOC0uMTI3aC0zLjI5NnYxMS41NTZoMy4wNTV2LTYuODAybC4wOTYuMTI4LjA4LjE0NC4wOTcuMTI2LjA4LjE0NC4wOTcuMTI3LjA4LjE0My4wOTcuMTI3LjA4LjE0My4wOTcuMTI3LjA4LjE0My4wOTcuMTI3LjA4LjE0NC4wOTUuMTI4LjA4MS4xNDIuMDk2LjEyOC4wODEuMTQyLjA5OC4xMjguMDk2LjE0Mi4wOC4xMjguMDk1LjE0NC4wODEuMTI3LjA5OC4xNDMuMDguMTI3LjA5Ny4xNDIuMDguMTI4LjA5NS4xNDIuMDgxLjEyOC4wOTYuMTQyLjA4MS4xMy4wOTYuMTQyLjA4MS4xMjcuMDk2LjE0My4wODEuMTI3LjA5Ni4xNDNoLjA2NGwuMDgxLS4xMjYuMDk2LS4xNDQuMDgxLS4xMjguMDk2LS4xMjcuMDgxLS4xNDMuMDk2LS4xMjcuMDgtLjEyOC4wOC0uMTQyLjA5OC0uMTI4LjA4LS4xMjYuMDk3LS4xMjkuMDgtLjE0Mi4wOTYtLjEyNy4wOC0uMTI2LjA4MS0uMTQ0LjA5Ni0uMTI4LjA4MS0uMTI3LjA5Ni0uMTQzLjA4LS4xMjcuMDk3LS4xMjguMDgxLS4xNDIuMDgtLjEyOC4wOTctLjEyNi4wOC0uMTQ0LjA5Ni0uMTI3LjA4LS4xMjguMDk3LS4xMjYuMDgtLjE0NC4wOC0uMTI3LjA5OC0uMTI4LjA4LS4xNDIuMDk2LS4xMjguMDgxLS4xMjYuMDk2LS4xNDQuMDgtLjEyN3Y2LjgzM2gyLjk0M3ptLTE4LjY1NS00Ljc2MmwuMDY0LjE0M2gtMi43MTdsLjA2NC0uMTQzLjA0OS0uMTQ0LjA2NC0uMTU5LjA2NS0uMTQyLjA0OC0uMTQ0LjA2NC0uMTQzLjA2NC0uMTU5LjA2NC0uMTQ0LjA0OS0uMTQyLjA2NC0uMTQzLjA2NC0uMTQ0LjA0OS0uMTU5LjA2NC0uMTQyLjA2NC0uMTQ0LjA0OS0uMTQzLjA2NC0uMTQ0LjA2NC0uMTU5LjA2NC0uMTQyLjA0OS0uMTQ0LjA2NC0uMTQ0LjA2NC0uMTU4LjA0OS0uMTQzLjA2NC0uMTQ0LjA2NC4xNDQuMDQ5LjE0My4wNjIuMTU4LjA2Ni4xNDQuMDQ5LjE0NC4wNjQuMTQyLjA2NC4xNi4wNDcuMTQzLjA2Ni4xNDMuMDY0LjE0NC4wNDcuMTQyLjA2Ni4xNi4wNDcuMTQzLjA2NC4xNDMuMDY0LjE0Mi4wNS4xNDQuMDYzLjE2LjA2NC4xNDIuMDUuMTQ0LjA2My4xNDIuMDY0LjE2LjA1LjE0M3ptNS4wNDkgNC43NjJoLjE2bC0uMDY0LS4xNDItLjA2NC0uMTQzLS4wNjQtLjE0NC0uMDUtLjE1OS0uMDYzLS4xNC0uMDY0LS4xNDMtLjA2NC0uMTQ0LS4xMy0uMjg1LS4wNjMtLjE2LS4wNjUtLjE0Mi0uMDUtLjE0NC0uMDYyLS4xNDItLjA2NS0uMTQzLS4wNjQtLjE0Mi0uMDY0LS4xNi0uMDY1LS4xNDMtLjEzLS4yODUtLjA0Ni0uMTQzLS4wNjUtLjE0NC0uMDY1LS4xNTktLjA2NC0uMTQyLS4wNjQtLjE0My0uMTI4LS4yODUtLjA2NS0uMTQzLS4wNDgtLjE2LS4wNjQtLjE0Mi0uMDY1LS4xNDItLjA2NC0uMTQzLS4wNjUtLjE0NC0uMDY0LS4xNDItLjA2NC0uMTYtLjA2NC0uMTQyLS4wNS0uMTQyLS4wNjItLjE0NC0uMDY1LS4xNDMtLjA2NS0uMTQyLS4wNjQtLjE2LS4wNjQtLjE0Mi0uMTMtLjI4Ni0uMDQ3LS4xNDMtLjA2NC0uMTQyLS4wNjUtLjE0My0uMDYzLS4xNTktLjEzLS4yODUtLjA2NC0uMTQ0LS4wNjQtLjE0Mi0uMDQ5LS4xNDMtLjA2NC0uMTU5LS4wNjQtLjE0Mi0uMDY0LS4xNDQtLjA2NS0uMTQyLS4wNjUtLjE0My0uMDY0LS4xNDItLjA2NC0uMTYtLjA0OC0uMTQyLS4wNjMtLjE0NC0uMDY2LS4xNDItLjA2NC0uMTQzLS4wNjQtLjE0NC0uMDY0LS4xNTctLjA2NS0uMTQ0LS4wNjUtLjE0My0uMDQ3LS4xNDItLjA2NC0uMTQzLS4wNjYtLjE0NC0uMDYyLS4xNTktLjA2Ni0uMTQyLS4wNjQtLjE0My0uMDY0LS4xNDItLjA2NC0uMTQ0LS4wNDktLjE0My0uMDY0LS4xNTktLjA2NC0uMTQyLS4wNjQtLjE0My0uMDY2LS4xNDRoLTIuOTczbC0uMDY0LjE0NC0uMDY0LjE0My0uMDY2LjE0Mi0uMDQ3LjE2LS4wNjQuMTQyLS4wNjQuMTQ0LS4wNjYuMTQyLS4wNjMuMTQzLS4wNjUuMTQyLS4wNjQuMTYtLjA2Ni4xNDMtLjA0Ny4xNDMtLjEyOC4yODUtLjA2NC4xNDQtLjA2NC4xNTctLjA2Ni4xNDQtLjA2NC4xNDMtLjA2NC4xNDItLjA1LjE0NC0uMDYzLjE0My0uMDY0LjE1OS0uMTI4LjI4NS0uMDY0LjE0Mi0uMDY1LjE0NC0uMDY1LjE0Mi0uMDQ3LjE2LS4wNjUuMTQyLS4wNjQuMTQyLS4wNjUuMTQ0LS4wNjQuMTQzLS4wNjQuMTQyLS4wNjQuMTYtLjA2NS4xNDItLjA0OC4xNDItLjEyOS4yODUtLjA2NC4xNDQtLjA2NS4xNDMtLjA2NC4xNTktLjA2NC4xNDItLjA2NC4xNDMtLjA1LjE0NC0uMDYzLjE0Mi0uMDY0LjE0My0uMDY1LjE1OS0uMDY0LjE0Mi0uMDY0LjE0NC0uMDY0LjE0My0uMDY1LjE0Mi0uMDQ4LjE0My0uMDY0LjE1OS0uMDY1LjE0My0uMDY0LjE0My0uMDY0LjE0Mi0uMDY1LjE0My0uMDY0LjE0Mi0uMDY0LjE2LS4wNDkuMTQzLS4xMjguMjg1LS4wNjQuMTQzLS4wNjUuMTQ0LS4wNjQuMTU5LS4wNjMuMTQyLS4wNjYuMTQzLS4wNDguMTQyLS4wNjUuMTQ0LS4wNjQuMTQzLS4wNjQuMTU5LS4wNjQuMTQyLS4wNjQuMTQzLS4xMy4yODYtLjA0OC4xNDEtLjA2My4xNi0uMTMuMjg2LS4wNjQuMTQyaDMuMjQ5bC4wNjQtLjE0Mi4wNDgtLjE0My4wNjUtLjE0NC4wNjQtLjE1OS4wNDgtLjE0LjA2NS0uMTQzLjA2NC0uMTQ0LjA0Ny0uMTQzLjA2NS0uMTQyLjA2NS0uMTQzLjA0Ny0uMTQ0LjA2NC0uMTU5LjA2Ni0uMTQyLjA0OC0uMTQzLjA2My0uMTQyaDQuNjE1bC4wNjQuMTQyLjA1LjE0My4wNjMuMTQyLjA2NC4xNi4wNDguMTQzLjA2NS4xNDMuMDY0LjE0Mi4wNDguMTQzLjEzLjI4Ni4wNDYuMTQxLjA2NS4xNi4wNjUuMTQzLjA0OS4xNDMuMDYzLjE0MmgzLjE1MnpNMjMuMjcgNzQuMzAybC4xMTMtLjA5NHYtNS4xNmgtNS4zMDZ2Mi4zMThoMi4zNDh2MS40NDRsLS4xMjguMDgtLjExNS4wNjQtLjE0My4wNjMtLjEzLjA2My0uMTQ1LjA2NC0uMTQzLjAzMi0uMTYuMDQ4LS4xNjIuMDMxLS4xNi4wMzItLjE2Mi4wMTUtLjE3Ny4wMTYtLjE3Ny4wMTdoLS4zN2wtLjE3Ni0uMDE3LS4xNi0uMDE2LS4xNjItLjAzMi0uMTYtLjAzMS0uMTYyLS4wNDgtLjE2LS4wNDctLjE0NS0uMDY0LS4xNDUtLjA2My0uMTQzLS4wNjMtLjEzLS4wOC0uMTI4LS4wOC0uMTI4LS4wOTUtLjEzLS4wOTUtLjExMi0uMDk2LS4wOTctLjExLS4xMTItLjExMi0uMDk3LS4xMS0uMDk2LS4xMjgtLjA4LS4xMjYtLjA4Mi0uMTI3LS4wOC0uMTQzLS4wNjMtLjE0NC0uMDY2LS4xNTktLjA0Ny0uMTI2LS4wNDgtLjE0Mi0uMDMyLS4xNDQtLjA2NS0uMjg1LS4wMTctLjE2LS4wMTUtLjE0My0uMDE2LS4xNTh2LS4zNjZsLjAxNi0uMTU5LjAxNS0uMTU3LjAzMy0uMTc2LjAzMy0uMTQyLjAzMi0uMTU4LjA0OC0uMTU5LjA2My0uMTQyLjA0OS0uMTQ0LjA2NS0uMTQzLjA4MS0uMTI3LjA4LS4xNDMuMDgtLjEyNy4wOC0uMTExLjA5Ny0uMTI2LjExMi0uMTEyLjA5Ny0uMTExLjExMi0uMDk1LjExMy0uMDk2LjExMy0uMDk0LjEyOC0uMDguMTI4LS4wOC4xMy0uMDc5LjE0NS0uMDYzLjE0My0uMDY0LjE0NS0uMDQ3LjE0NS0uMDQ4LjE0NS0uMDMxLjE2LS4wMzIuMTQ1LS4wMTYuMTYyLS4wMTdoLjMzN2wuMTc3LjAxNy4xNzcuMDE2LjE2LjAxNS4xNi4wMzIuMTYyLjAzMy4xNDUuMDMxLjE0My4wNDcuMTQ1LjA0OC4xMy4wNDguMTI4LjA2My4xMy4wNjQuMTQzLjA4LjEyOC4wNzguMTMuMDguMTI4LjA3OS4xMjguMDk2LjEzLjA3OS4xMjguMTExLjEyOC4wOTUuMDk2LS4xMjYuMTEzLS4xMTEuMDk2LS4xMjguMTEzLS4xMjcuMDk2LS4xMjYuMDk4LS4xMTMuMTEyLS4xMjYuMDk3LS4xMjcuMTEyLS4xMjguMDk3LS4xMS4wOTYtLjEyNy4xMTMtLjEyNy4wOTYtLjExMS4wOTYtLjEyOC4xMTMtLjEyNy4wOTYtLjEyNi4xMTMtLjExMS4wOTYtLjEyOC0uMTI4LS4wOTYtLjEzLS4xMS0uMTI4LS4wOTUtLjEyOC0uMDk2LS4xMjgtLjA4LS4xMjgtLjA5NC0uMTQ2LS4wOC0uMTI5LS4wOC0uMTQzLS4wNzktLjEzLS4wOC0uMTQ1LS4wNjItLjE0My0uMDgtLjE0Ny0uMDYzLS4xNDMtLjA2NC0uMTQ1LS4wNjMtLjE0NS0uMDQ4LS4xMjgtLjA0OC0uMTQ1LS4wMzItLjE0NS0uMDQ2LS4xNDUtLjAzMy0uMTQzLS4wMzItLjE0Ny0uMDMxLS4xNi0uMDMyLS4xNi0uMDMxLS4xNDUtLjAxNy0uMTc3LS4wMzEtLjE2LS4wMTdoLS4xNjJsLS4xNzctLjAxNS0uMTc3LS4wMTZoLS42OTFsLS4xNi4wMTYtLjE2Mi4wMTUtLjMyLjAzMy0uMTYyLjAzMi0uMTYuMDE1LS4xNi4wMzEtLjE0NS4wNDgtLjE2Mi4wMzItLjE0NS4wNDgtLjE0NC4wMzEtLjE0NC4wNjUtLjE2Mi4wNDYtLjEyOC4wNDgtLjE2LjA4LS4xNDUuMDYzLS4xNDUuMDY0LS4xNDUuMDgtLjE0NS4wOC0uMTQ1LjA3OS0uMTI3LjA4LS4xMy4wNzctLjEyOC4wOTYtLjEzLjA4LS4xMjguMDk0LS4xMTIuMDk2LS4xMjkuMTExLS4xMTMuMDk1LS4xMTIuMTEyLS4xMTIuMTExLS4wOTcuMTExLS4xMTIuMTExLS4wOTcuMTExLS4wOTcuMTI4LS4wOTYuMTI2LS4wOTYuMTI3LS4xNjIuMjU0LS4wNzkuMTI3LS4wOC4xMjgtLjA4Mi4xNDItLjA2NC4xNDMtLjEyOC4yODYtLjA2NC4xNDMtLjA2Ni4xNTktLjA0Ny4xNDItLjA0OS4xNTktLjA0Ny4xNDItLjAzMi4xNi0uMDQ5LjE1OC0uMDMyLjE0My0uMDE3LjE1OS0uMDMyLjE1Ny0uMDE2LjE3Ni0uMDE2LjE1OXYuMTU3bC0uMDE1LjE3NnYuNTIzbC4wMTUuMTYuMDE2LjE1OC4wMTYuMTYuMDE3LjE0Mi4wMzIuMTU5LjAxNS4xNDIuMDMyLjE2LjA1LjE0Mi4wMzEuMTU5LjA1LjE0Mi4wMzEuMTQ0LjA2NC4xNDIuMDQ5LjEyOC4wNjQuMTQyLjA2NC4xNDMuMDY0LjE0Mi4wNjQuMTQ0LjA4MS4xMjYuMDgxLjE0NC4wOC4xMjYuMDguMTI4LjA5Ni4xMjcuMDgxLjEyNi4wOTYuMTExLjA5Ny4xMjguMDk3LjExLjExMi4xMTIuMTEyLjExLjExMy4wOTcuMTEzLjExLjExMi4wOTcuMTEzLjA5NC4xMy4wOTYuMTI3LjA5NS4xMjkuMDk2LjEyOC4wNzguMTMuMDguMTQ0LjA3OS4xMjguMDguMTQ1LjA3OS4xNDUuMDYzLjE0NC4wNjMuMTQ2LjA2NC4xNi4wNjMuMTQ0LjA0OC4xNDUuMDYzLjE0NS4wNDguMTYxLjAzMi4xNDQuMDQ4LjE2Mi4wMzEuMTQ1LjAzMi4xNi4wMzEuMTYuMDMyLjE2Mi4wMTYuMTYuMDE3LjE2LjAxNS4xNzcuMDE2LjE2LjAxNWguNjkzbC4xNzctLjAxNS4xNi0uMDE2LjE3Ny0uMDE1LjE2Mi0uMDE3LjE3NS0uMDE2LjE2Mi0uMDE1LjE2LS4wMzIuMTYyLS4wMzMuMTQzLS4wMzEuMTYyLS4wMzIuMTQ1LS4wNDguMTYtLjA0Ni4xNDUtLjA0OC4xNDUtLjA0OC4xNDUtLjA0OC4xNDMtLjA2My4xNjItLjA2My4xNDUtLjA2NS4xNi0uMDYzLjE0NS0uMDguMTQ1LS4wNjIuMTQ0LS4wOC4xNDUtLjA4LjE0NC0uMDc3LjEyOS0uMDguMTMtLjA4LjEyNy0uMDk1LjEyOS0uMDguMTMtLjA5NC4xMS0uMDguMTMtLjA5NnpNMjggMzYuMDE2di01Ljk5NGgtNy45NzhWMTkuOTlIMjhWMTRIMTR2NDBoMTR2LTUuOTgyaC03Ljk3OFYzNi4wMTZIMjh6bTQwLjAwMyAxMC41YzAgMS41NzMtLjc5IDIuMzAzLTIuMzQxIDIuMzAzaC0xLjE1Yy0xLjYxIDAtMi40OTQtLjczLTIuNDk0LTIuMzAzVjIyLjAwNWMwLTEuNTc0Ljg4My0yLjYyNCAyLjQ5My0yLjYyNGgxLjAzNWMxLjg4OCAwIDIuNDU3LjYzOCAyLjQ1NyAyLjYyNHY3Ljk5M2w1Ljk5Ny4wMXYtOC42MTRjMC00Ljg4Ni0yLjU0Mi03LjM1OC03LjU0NC03LjM1OGgtMi45OTJjLTUuMDAyIDAtNy40NjQgMy4wOC03LjQ2NCA3Ljk2OXYyNC43OTJjMCA0Ljg4OCAyLjQ2MiA3LjIyNyA3LjQ2NCA3LjIyN2gzLjA0OWM1LjAwNCAwIDcuNDg3LTIuMzQgNy40ODctNy4yMjd2LTguNzkxaC01Ljk5N3Y4LjUxek00OCA1NGg2VjE0aC02djQwem0tOC4wMDUtMjIuMjI4YzAgMS42LS40MzcgMi4yMjgtMS44ODggMi4yMjhoLTIuMTEzVjE5LjM3MmgyLjExM2MxLjQ1IDAgMS44ODguNzQyIDEuODg4IDIuMzQydjEwLjA1OHpNMzAgMTR2NDBoNS45OTRWMzkuNDg1aDMuMDI2YzQuNjcyIDAgNi45OC0yLjQ1NiA2Ljk4LTcuNDI2di0xMC42M0M0NiAxNi40NTYgNDMuNjkyIDE0IDM5LjAyIDE0SDMwem0zMCA3Ni4wMzhIMjhsMTYgNS45NjYgMTYtNS45NjZ6Ii8+Cjwvc3ZnPgo=" alt="Epic Games Logo"/>
+        </div>
+        <section>
+            <h1 data-t="challengeTitle"></h1>
+            <p data-t="challengeSubtitle" class="cf_challenge_text"></p>
+        </section>
+    </div>
+    <div class="cf_challenge"><div><p id="cf-spinner-please-wait"></p><p id="cf-spinner-redirecting" style="display:none"></p></div><noscript><h1>Please turn JavaScript on and reload the page.</h1></noscript><div id="no-cookie-warning" style="display:none"><p>Please enable Cookies and reload the page.</p></div><form id="challenge-form"></form><script>(function(){window._cf_chl_opt={cvId: '3',cZone: "ucs-images.fortnite.com",cType: 'managed',cRay: '8e2a57652d7ddf19',cH: 'k2EW3_77VEC2a4kzPkrmmtjXRwU9EsQxexu6rJo6MKQ-1731622329-1.2.1.1-sJnRgwPFz.n2NGVRsXuMEIhl41ZnuHpmGfUUovy3JslhIlrNa7lCa4PR91E4KzQZ',cUPMDTk: "\/blobs\/d8\/cf\/1f3b-f24c-46c4-88c4-b065e4ff7e5b?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2SBBZFECCYQWRK6G%2F20241114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241114T220602Z&X-Amz-Expires=90000&X-Amz-Signature=a77c1e6e15dddfe0c89fd7ebab52c21141b59f71bcc6fcb9742c75411ec0310e&X-Amz-SignedHeaders=host&response-content-disposition=inline%3Bfilename%3D%22file.png%22%3Bfilename%2A%3DUTF-8%27%27input-lg.png&x-id=GetObject&__cf_chl_tk=bBQDNCQz8MtDzpELcQlRbPenwzY_Omw._oG_f7cyMC4-1731622329-1.0.1.1-jkVN9rXJCzj7sv31YFxHNUhqUYnfRoFnK804yscwJQI",cFPWv: 'b',cITimeS: '1731622329',cTTimeMs: '1000',cMTimeMs: '390000',cTplC: 1,cTplV: 1,cTplB: 'cf',cK: "",fa: "\/blobs\/d8\/cf\/1f3b-f24c-46c4-88c4-b065e4ff7e5b?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2SBBZFECCYQWRK6G%2F20241114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241114T220602Z&X-Amz-Expires=90000&X-Amz-Signature=a77c1e6e15dddfe0c89fd7ebab52c21141b59f71bcc6fcb9742c75411ec0310e&X-Amz-SignedHeaders=host&response-content-disposition=inline%3Bfilename%3D%22file.png%22%3Bfilename%2A%3DUTF-8%27%27input-lg.png&x-id=GetObject&__cf_chl_f_tk=bBQDNCQz8MtDzpELcQlRbPenwzY_Omw._oG_f7cyMC4-1731622329-1.0.1.1-jkVN9rXJCzj7sv31YFxHNUhqUYnfRoFnK804yscwJQI",md: "hpk3rSbZUBfLUqqTXqYMUGRMs.YpW_coPKDl1bfn85g-1731622329-1.2.1.1-XK4DITA0QCYxGoCSJ3d8V7ADedSBtD9rCjryQaiiE1G9FQHFbducpcisrIGJwV6S3BjtFwCJ8OFUMK5yDIp6Re.oZtgP.rCK6.nCT_hbA1ogCsjkNZ2SRk2E2p08H50xQjcxNbfZkA_k9FAHTlcJGxHTT3dNLgSPJtoejQuP96MdLrQcoAPezG5x4qFk6vaOMrCUOpDnI0R6gcvC4oclQ5I8irubCisnVKuHy5myIUepmiisdqR0JzafzzcKkRWMTL4FKNWS9tMLZsG7VNg1nCVyuMlJloeyq3cvVVZ.286Q4giofWfGiiqDm.7NdYQ4cPmNSAycv.Nn7rP_z184Kf0HSQy5y01_DzISqqETIKmBlYh1ZudIgWX6OCtxIN1aQvgAQrzkwUC83o49gDjEIcVTq8a.YQTHpeQmLmM64Tio7KQgz.Ltp2aAATE9iAUOIxwm7pGiVH.WgIyXbIXxNwLJ_QqsKCPP4cOgUG9Q5KjN6ybgIzbMwt2iL314xtRH044APkUvMFm4MRI8cG3fyN9mJHxB5_pTLfkVWceG5OJVHVrcx0nIP1vXDBXQ_FM_QPfhMmaYpW9EywSXKkebwjm0Ew7ATICeiBIk8imROs0tojoKJyN9rw9C4rJ0iLMKOILqx2fieaEDQN.rn3bc6_j4Q67MKQ5TQTLPnNBQY3zsAh2tyPbfr9iqPuloswiPrHPreC6ULHJWsOU25gz3._6CWLNMTfuaJLHxJtiKxrAZZrar_rZ6qHOo_3uAr93goHG.p7Aach02S4oXaRqkOy3U3rOxr8nBbsm.doKh9JoQyVgDn4ifa_edxI0WlAI_wblfinYsMTT7SzO.H.pPYSHnrxFmdWdA7nwfdnDpIgRUxs1pDAyBbUuvyopiYmekpZVZLTXyYJkhw3zICiegpiu3WG6COdnlddlvEpCyPEEebz8diOuy.KlyGQADOGz2_WD4CGKIA4clHZc5V0Hx47rzIoamJNPAZtuaVcNHv3581tstUXhdaHtX20RrNH1ZVbeEWmLJQVdoOxTt2ALVabCboofGOiTSpUD8oc41cbpPjMLfDOP1cZxLwLz6TIOA2orUIeh_XzXkSpfyGBcr9IvhJoogfYcvmXiHNsvj.tmfU_ITetp6m4XkZ4s9tiuvoeoferAcvHGWBMOK9nN1EWgM4R37L.Nf21kz6qlWDLKxH4JhAk5HZS.CPjyKvHVovybyFLhAEgFn19jL29V3EfmjqphkLrk6o13dtUMsAEgm8nh1AIUkPdj.8IcS_Y3efoJt_.j4B3zQpfk_5uFv7Axe09SJJJRNdTgwpwxI9QSwGHNooYEtT_88cpKLN5Fj5dkPP6xYoasSCg8WY9GKwlDzOdRk64JapN_fAtoW22VqORVomcqXIRDfwGiSjheyoX92BKqIXIGdQ0P8rQWKe8RjxFZG.wsrNU1id5L5N7eqy41bDd_Xw4RQIYb.1xO2nOcCKHhP5G8DbYVTV.FC.SRlRAyKPQqiRVFA.o8Id13EnuAlZEDvyf.BQdAh.KZvTvNtntGaaqg_us2HCa.8eiBF5lHR7ucswXKjV1buaBdlu77X54BuEAKDvSi3g0qCJ2mA4KB0o6TdXxHLDmKSgF.Ft4ijJohmMl57LuwJtgdEGvWumgX4.1joPQ2HaVJwjiDOv6Yi20qwXMdyWK_pfHpejKt6.FgRaJRMvo_MQoda8CDI4HeI8PyPnE7lRYMIWkUpR.BFfgfDxvKoexgYAPZ8p7J.6fU1c_RU0B7p5L6rrFG4GC4OroP9xbcPS7Ha81W7UBLZiU1OBsqOWdlZ388JmGKpaiqTFAbL2EZ9yEXp4.9wVA9.syWarzuOMMziaqq76jfIuJ7gseY5WBqR3UmzHQjk_utLOFBPU_Ke2w6xCVIRoVjmPmmsoJudTqs3clQFOR5zQa0XeQGrdQVdIr4RjSLg9gYKPsy3HLSKMWzcDUwGjAYVn7SDWKFN7IYMVZev1sjCvRA0I9NAGBdqKX6eR9ieQQIDiWatBe1kIkL4x1Pz31RBIjuV796d.Q0oefXZ50964f.ywdR7FFygK1AbsjnrFcK_ZIZo4IpVexe9jLTlTHSyAnzju3qpzeeZyi8NIg4C2gTbWhV91Z2.0Mgqb7dazPa8yucaYNNkSqXD7jQWRqQnk7kIOhMoTc58utOSTcPcpMv2KPaIPA_8Kw0g90RmZoVrDu4rlAxFo8zwxxY6C8YP9W6kngM6ZN7y0dP6Xxxn_G1eo4UdcAA3Bfmy8QUzb5InFHSZWeDKEmPweBDjkMf4NRCiylpkG.SR5btQn1FkE.DsrDKj1ao8iUMXHYOk99mfpqk04iWA91hg9D0roeUnbUnaUQj_mybERA6leqHHip35G53dz4P93B63yiQIk_5_3nIHlSmL82duv.VD.qMi6RZP.ngIeTHekep1RSbeYqGUhnr7yefpgXgqxGmh0MIprhb1J9TUCgSl3METKjVxfoT15s2FKU8xhJSG1bp36agtpahUml3gBUWJ4BnVa3P4Q3Fw2BNVN9qn1i9NYReg.JohJd_HEr2VwmaxrRcOBTTWiifr6d_ggZA9GLogT3nYwOWsnlt6M5XUcr7u3iGZy3ayrx72tcrl_GSm8uN421LhEcTwzWGVIlAb_FhiS0zPm2zH45ToLmdCHY2Mvbp5SznQsQnHzVh882da2Dg7I.4LrY5dLeRGEjJphAkV5dDyKDryBfR7EsX6HatwmEvQT8av7WJZX4N1EXRB1sAcG9Yh02T6rFKUKlP7h6xALPjJVxH89c_2MvzkOmYHAmdWFaPqa0sYGTOvyUo7Yp2M0Ib2nwsKzLprnPRgiOiv7HqeokmGutsnM1jsPFTMP9dmj2aCPFz9N4bujDa.l7c01b12QgN7XQGgOcMjnpPMvfkoeIeFlZ.Iq_1OifOU0vIDqKbtgUTixxyhWDRYsQGsjnRicjYy67Qir7hkKL6jnQLsi4WEGbThXleKksq1R5fgn80C3zc0trvZI_mQv7WH1NY_hkFvWBMqLohm0Kpbve1jcdHMxqm.1cLMN8_9GM5UIP_r0cQeDUVNUIyCtz50h50GiBJCzeYeNRoNqPH1SvtlEwdQsxxH.8gS9a5c90PEemcieGdab.lCHnUD40bNyNST2HVuIa7Vdevd_3FcBQBrryfcRgynIW0jphwaabpVPm4I9IdsqOdZeNC7dUaexP84dVSAFnxaE3tIKkXtS7Xwpxvk_b6lfaeIYbX2EGiquE3VioZ9xiMcKNi78Ta8XGyLVohFpTTsv2AnO_4QtWi0vikF9ifY3Jq4PwGObxfvvGjDI.THj.TS0PWS2p1cJYx8z0Cy08qMwwxvEDw0fgYUenB6vd.M2E_CJS7XKXGPmPcJL7xcTtgTIerBKsi_k4c1La4AoP8C63fY0u5xMahe5Ntu66Bu9MmzdxXrkhtG362cGPcu2KrRS1nxAblwta_6Pz8oXGB6FGoTpT_iYY6uuKLRJgF9VCSxHQNvYwKn2kzGUGaIM3Na7oKNL9bmw2rQDRWByxmP_Q",mdrd: "DHcJe2vL0JOnaNtFlgEaOSSU6Ql.0F6jh79d8vt.COI-1731622329-1.2.1.1-tLqeFEuVgD0Ne.Rvu4sxoCjGjYpoBTVJmle6GNGBVLeGrf2S1v3kaNnlKeOR639oVpf2XKGmdW4QR2NhHxDQIzQVI4IZ1y7c5FWaR58iJG.xXH62CDtbzRarcALXz2yOxsq6Mv_ptNJbHcuHaIPjjZaQ3oll37LmiL0abI1yUKP57aoSpKGnwzZBi0OxPu6FPSLfOiKXCFgsNuXmFXtmsl9MUMSYDccN0yhuJybgAR_eR9Zqdt0R_SvSLN09S3WYG2YRgyxZRo5yzDbcG_n0wLBpIYsgb8nK0ygvcY6L7s9AwXEs.Fej9Fsx6kkCv8lxGl1GXFut_HAbI1p0HAhPkDoTyKsv7cWZ7oB_jJ2.l0C7FPz_ZUwnXsK8ZtHPowOGzeYuL6fBSDIWPrHmejM8r4vvbQjAuJ_NZqCfoDjPO5S86uO7udvPF14VnzRTTAnv2azVuzDc65jDm2Nj_k9FuiNJYhGLfJ7PbvxbVhEu2ZBJoWRFXaJ9VHbUC0e0Tbem19OLIw_37Ras2O.mQbh.fgKLOVW_jUrB6Vv0NdO3flfD5.ueW2caXrM3OnsZ2V.vjqMZXMBfmXZOo59TK76cEBZ74Qtt9FhvA2TJJ3BpS1pZxvq5aJipdal0vYrnuB4UmXmijCHZgABCPzmHdX0fXrjc3dhUCjYCtMGyyllXb5hSaYiWeYTvbDHk7DhU7mpKXTJHk.yBdlVHsyV8JhBK6KGdJtBcs9lW_WQlPMxXe0mNM9jmd2PKY8XsEUZhbT0eC9YnY0mAAuEpgpqRV8vU1eHBsFJvgq2A88dFdJvaybUrHeAJA80.CUDt_Xm1VXbZFNVHz1s8t5tFe4gjPNJEbMg5N1xteNvYdZNMrdiLQkwq93vSYznb0YpND4hn7DMLoii6sgGQHG5x_HVqJDlDz9iTkG3wRjksW4r59w_l0duBNSRy0oVlJ55Q3AjgAo1ku5vFaYQ054zXF_xsFMHbCUT6qR2bTDsA3RjaniQiUwVyyTYN1iIWMECRSOr3cc0cM1weheLAJ32mssLWDA5XefCOEHVvACXiRr4AblYZPHmn23RtjVxZtDW9QfbKSHWD5GNe1zUr9jkb7WmiQWPfWrdX1GtoDRdOiNOJIzowWbgb2gvBKPhNX9Brm9TxH2QLtUVbzS5Hu6CD5er_syXNk3kV2nkOQwdaNSJPrFl0CJ3riIahIKkI0MxUW4UTuDsxSpT78HfcANCvPob.xlFn8ZbexounTlggHMC5xJSmNG.8Kond7VbgL5iHFmawIx2vaLiFsx8KBnwhy5N5HaOImkm3iYFZWEc0WXn.AU._uwWOGi0Bhyq6_23udk3sFxIP4yWHfH6rP6irsylmDCTxxH.TXBYPKqpcaB6SUhNaZNsJc8pARJwq677N1Xaga3hawT8GSJfBAqjmV0k7RP9qLucXKPAZCkMnZvWghVYWIOU1EZTYXyX.5bkxlnPJuVHKIN9_wtL2PMq2rEt3uOVvVHcO84eDqHOWHYxWozRIxQi9xWesFQtWuKJ7y59N0mnsZeCX_e1r2Udl8fsFCAs_Uw1mu3QdfICEbpGx4lFpIf8ggMojOkzo0kLf18E08CBclM3Vaoz07dj09dLm57piC3LbS3VM6swGgBuaiKs_k0hKCeXthfFg6jq3cll6UWFVHuN3RhuMeeYAGbkjL8S3pRtE3w6zr4TIV.Tdy44xsj6mdyYO92_Wb98Eb8IfAx.m2PuPHpWre8M1eiUfsgwY_4EsdVvuNcOPSsT8dZxcDxcpFZte_7YZxZ8dRBJ5xeMbqTy05TlOr7eLXJnAOyaLD5Jiv._mPMVwBA_AawIjeKD2NxSNpSBeKvenqG4XC5yuNU44vYeWD3pQKRV0Yh1UBDCEP7TrX72SzkOPHJz4F1aYxlQT.D34vCwDdrbN.97cM1nKZi2hzxvI1D.uk.tSIJITP0HQ73X1XMMb339hCVGCEFdVZYQ4gfUuFOf9v5H1fCWsOjAq98fPv1tVYD6u0KMryTUnUK1fyLyVrZnyeqjINLdxsynB.sD3ynlxrNQ9PE6PLtJoU9kiUxMi4GYtpZBLIJIfKjUv6imCwCFmQGGpj0L9POT9ZirxXDWAieXUdbb9A7nSPvvUamf5KUoV60cC7envKpXXRficaLpCcQrzgPIKlJo.CLuiddpkV7_wgCSP_wADliSPDiOovaMau9VbRjdUaCBWWNRjH1.KpPNht_orcwH7iXpEGKWPXKH0n21Dr50Tgc9T_tNpy_w79dZ4Z3AdiLeQMTnrmQ2JpIo"};var cpo = document.createElement('script');cpo.src = '/cdn-cgi/challenge-platform/h/b/orchestrate/chl_page/v1?ray=8e2a57652d7ddf19';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null, "\/blobs\/d8\/cf\/1f3b-f24c-46c4-88c4-b065e4ff7e5b?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2SBBZFECCYQWRK6G%2F20241114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241114T220602Z&X-Amz-Expires=90000&X-Amz-Signature=a77c1e6e15dddfe0c89fd7ebab52c21141b59f71bcc6fcb9742c75411ec0310e&X-Amz-SignedHeaders=host&response-content-disposition=inline%3Bfilename%3D%22file.png%22%3Bfilename%2A%3DUTF-8%27%27input-lg.png&x-id=GetObject&__cf_chl_rt_tk=bBQDNCQz8MtDzpELcQlRbPenwzY_Omw._oG_f7cyMC4-1731622329-1.0.1.1-jkVN9rXJCzj7sv31YFxHNUhqUYnfRoFnK804yscwJQI" + window._cf_chl_opt.cOgUHash);cpo.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(cpo);}());</script></div>
+    <div class="cf_challenge_section">
+        <section>
+            <p class="cf_challenge_text_small"><strong data-t="sessionId"></strong>: 8e2a57652d7ddf19 </p>
+            <p class="cf_challenge_text_small"><strong data-t="ipAddress"></strong>: 129.101.71.109 </p>
+        </section>
+    </div>
+</div>
+</body>
+</html>
