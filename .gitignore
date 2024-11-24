@@ -1,3 +1,4 @@
 scheduled.bat
 data.json
 temp.py
+__pycache__/
