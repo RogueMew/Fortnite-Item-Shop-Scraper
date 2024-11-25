@@ -65,7 +65,7 @@ class shop:
             self.__parsed = parser(self.__RAWdata)
         
     @property
-    def RAW(self) -> dict:
+    def RAW(self) -> str:
         if self.__RAWdata == None:
             return self.RAWdata            
         return self.__RAWdata

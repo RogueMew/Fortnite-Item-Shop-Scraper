@@ -1,4 +1,5 @@
 import fortniteShop as fs
+import requests as web
 
 from io import StringIO
 
@@ -9,13 +10,16 @@ import typer
 import datetime
 import inspect
 import json
+import time
 
 app = typer.Typer()
 
 @app.command()
 def print_shop(variants: bool = False, leaving: bool = False, new: bool = False, catagories: bool = False, sections: bool = False) -> None:
     argCount = 0
-
+    todayDate = datetime.datetime.now()
+    today = f"{todayDate.year}-{todayDate.month}-{todayDate.day + 1}" if todayDate.hour >= 17 and todayDate.hour <= 23 else f"{todayDate.year}-{todayDate.month}-{todayDate.day}"
+    
     for argument in inspect.getfullargspec(print_shop).args:
         if argument == False: 
             argCount += 1
@@ -34,8 +38,6 @@ def print_shop(variants: bool = False, leaving: bool = False, new: bool = False,
                 return [colorama.Fore.CYAN + str(cell) + colorama.Style.RESET_ALL if isinstance(cell, str) else cell for cell in row]
     
     def color(row):
-        today = datetime.datetime.now()
-        today = f"{today.year}-{today.month}-{today.day + 1}" if today.hour >= 17 and today.hour <= 23 else f"{today.year}-{today.month}-{today.day}"
         if row["inDate"] == today and row["outDate"] == today:
             return [colorama.Fore.YELLOW + str(cell) + colorama.Style.RESET_ALL if isinstance(cell, (str)) else cell for cell in row]
 
@@ -91,10 +93,10 @@ def print_shop(variants: bool = False, leaving: bool = False, new: bool = False,
         dataList = df.apply(color, axis=1).values.tolist()
         print(tabulate.tabulate(dataList, headers=df.columns, tablefmt="grid"))
     
+    print(f"\nNext Shop Rotation in: {17 - todayDate.hour if todayDate.hour < 17 else 17 + (23 - todayDate.hour)} hours")
 @app.command()
 def expand_bundles():
     shop = fs.shop()
-    
     #Offline Running
     #file = open("data.json", "r", encoding="utf-8")
     #shop.RAWdata = file.read() 
@@ -107,27 +109,53 @@ def expand_bundles():
         raise KeyError("Missing 'categories' Key")
     
     bundles = {}
+    request = web.get("https://fortnite-api.com/v2/cosmetics")
     
-    for category in json.loads(shop.RAW)["catalog"]["categories"]:
-        for section in category["sections"]:
-            for offer in section["offerGroups"]:
-                for item in offer["items"]:
-                    if item["assetType"] != "staticbundle" and item["assetType"] != "dynamicbundle":
-                        continue
-                    itemsInBundle = []
+    if request.status_code != 200:
+        raise ConnectionError("API is not Responding")
+    
+    allItems = {
+        "br" : request.json()["data"]["br"],
+        "tracks" : request.json()["data"]["tracks"],
+        "instruments" : request.json()["data"]["instruments"],
+        "cars" : request.json()["data"]["cars"],
+        "lego" : request.json()["data"]["lego"],
+        "legokits" : request.json()["data"]["legoKits"],
+        "beans" : request.json()["data"]["beans"]
+    }
+    for item in (
+        item
+        for category in json.loads(shop.RAW)["catalog"]["categories"]
+        for section in category["sections"]
+        for offer in section["offerGroups"]
+        for item in offer["items"]
+    ):
                     
-                    for bundlePiece in item["ownershipCalculationData"]["itemGrantTemplateIds"]:
-                        itemsInBundle.append(bundlePiece.split(":")[1])
+        if item["assetType"] != "staticbundle" and item["assetType"] != "dynamicbundle":
+            continue
+        
+        itemsInBundle = []
+        
+                
+        for bundlePiece in item["ownershipCalculationData"]["itemGrantTemplateIds"]:
+            for catagory in allItems:
+                itemIds = list(map(lambda x: x["id"].lower(), allItems[catagory]))
+                if bundlePiece.split(":")[1] in itemIds:
+                    itemsInBundle.append(f"{allItems[catagory][itemIds.index(bundlePiece.split(":")[1])]["name"] if catagory != "tracks" else allItems[catagory][itemIds.index(bundlePiece.split(":")[1])]["title"]} ({allItems[catagory][itemIds.index(bundlePiece.split(":")[1])]["type"]["displayValue"] if catagory != "tracks" else "Jam Track"})")
+                    break    
+                elif list(allItems.keys()).index(catagory) == len(allItems) -1:
+                    itemsInBundle.append(f"{bundlePiece.split(":")[1]} ({bundlePiece.split(":")[0].replace("Token", "").replace("Cosmetic","")})")
+                
                     
-                    bundles[item["title"]] = itemsInBundle     
+        
+        bundles[item["title"]] = itemsInBundle     
                     
-    for bundle in list(bundles.keys()):
+    for bundle in sorted(list(bundles)):
         print("\n", bundle)
         
         for item in bundles[bundle]:
             print("   |")            
-            print(f"   └──[{item}" if bundles[bundle].index(item) == len(bundles[bundle]) - 1 else f"   ├──[{item}")            
-   
-    
+            print(f"   └──[ {item}" if bundles[bundle].index(item) == len(bundles[bundle]) - 1 else f"   ├──[ {item}")            
+
 if __name__ == "__main__":
     app()
