@@ -15,13 +15,15 @@ app = typer.Typer()
 @app.command()
 def print_shop(variants: bool = False, new: bool = False, leaving: bool = False, dropin: bool = False, categories: bool = False, sections: bool = False, assetType: str = None) -> None:
     localVars = locals()
-    argCount = 0    
+    
+    argCount = 0
     for _, value in localVars.items():
         if value:
             argCount += 1
+    if argCount >= 2: raise ValueError(f"not able to process more than 1 parameter")    
     
-    if argCount >= 2: raise ValueError(f"not able to process more than 1 parameter, you tried processing {argCount} parameters")    
     assetTypes = ["outfit", "pickaxe", "backbling", "glider", "shoes", "wrap", "emote", "jam tack", "dynamic bundle", "real money pack", "guitar", "keytar", "microphone"]
+    
     if assetType and assetType.lower() == "--help":
         print(f"Valid arguments: " + colorama.Fore.GREEN + ", ".join(assetTypes) + colorama.Style.RESET_ALL) 
         exit()
