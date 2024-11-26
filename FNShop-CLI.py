@@ -8,21 +8,19 @@ import pandas
 import tabulate
 import typer
 import datetime
-import inspect
 import json
 
 app = typer.Typer()
 
 @app.command()
-def print_shop(variants: bool = False, leaving: bool = False, new: bool = False, categories: bool = False, sections: bool = False, assetType: str = None) -> None:
-    
+def print_shop(variants: bool = False, new: bool = False, leaving: bool = False, dropin: bool = False, categories: bool = False, sections: bool = False, assetType: str = None) -> None:
+    localVars = locals()
     argCount = 0    
-    for argument in inspect.getfullargspec(print_shop).args:
-    
-        if argument == False or argument is None: 
+    for _, value in localVars.items():
+        if value:
             argCount += 1
     
-    if argCount >= 2: raise ValueError("not able to process more than 1 parameter")    
+    if argCount >= 2: raise ValueError(f"not able to process more than 1 parameter, you tried processing {argCount} parameters")    
     assetTypes = ["outfit", "pickaxe", "backbling", "glider", "shoes", "wrap", "emote", "jam tack", "dynamic bundle", "real money pack", "guitar", "keytar", "microphone"]
     if assetType and assetType.lower() == "--help":
         print(f"Valid arguments: " + colorama.Fore.GREEN + ", ".join(assetTypes) + colorama.Style.RESET_ALL) 
