@@ -10,15 +10,15 @@ import typer
 import datetime
 import inspect
 import json
-import time
 
 app = typer.Typer()
 
 @app.command()
-def print_shop(variants: bool = False, leaving: bool = False, new: bool = False, catagories: bool = False, sections: bool = False, assetType: str = None) -> None:
-    argCount = 0
-        
+def print_shop(variants: bool = False, leaving: bool = False, new: bool = False, categories: bool = False, sections: bool = False, assetType: str = None) -> None:
+    
+    argCount = 0    
     for argument in inspect.getfullargspec(print_shop).args:
+    
         if argument == False or argument is None: 
             argCount += 1
     
@@ -81,7 +81,7 @@ def print_shop(variants: bool = False, leaving: bool = False, new: bool = False,
     if variants: df = pandas.read_json(StringIO(shop.varaints(True)))
     elif leaving: df = pandas.read_json(StringIO(shop.leaving))
     elif new: df = pandas.read_json(StringIO(shop.new))
-    elif catagories: 
+    elif categories: 
         for category in sorted(shop.categories):
             print("\n"+category+": ")
             df = pandas.read_json(StringIO(shop.category(category)))
@@ -96,7 +96,7 @@ def print_shop(variants: bool = False, leaving: bool = False, new: bool = False,
     elif assetType: df = pandas.read_json(StringIO(shop.assetType(assetType.lower())))
     else: df = pandas.DataFrame(shop.parsed)
     
-    if not sections:
+    if not sections and not categories:
         dataList = df.apply(color, axis=1).values.tolist()
         print(tabulate.tabulate(dataList, headers=df.columns, tablefmt="grid"))
     
@@ -165,5 +165,8 @@ def expand_bundles():
             print("   |")            
             print(f"   └──[ {item}" if bundles[bundle].index(item) == len(bundles[bundle]) - 1 else f"   ├──[ {item}")            
 
+@app.command()
+def archived():
+    pass
 if __name__ == "__main__":
     app()
