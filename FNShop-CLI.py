@@ -15,16 +15,21 @@ import time
 app = typer.Typer()
 
 @app.command()
-def print_shop(variants: bool = False, leaving: bool = False, new: bool = False, catagories: bool = False, sections: bool = False) -> None:
+def print_shop(variants: bool = False, leaving: bool = False, new: bool = False, catagories: bool = False, sections: bool = False, assetType: str = None) -> None:
     argCount = 0
-    todayDate = datetime.datetime.now()
-    today = f"{todayDate.year}-{todayDate.month}-{todayDate.day + 1}" if todayDate.hour >= 17 and todayDate.hour <= 23 else f"{todayDate.year}-{todayDate.month}-{todayDate.day}"
-    
+        
     for argument in inspect.getfullargspec(print_shop).args:
-        if argument == False: 
+        if argument == False or argument is None: 
             argCount += 1
     
     if argCount >= 2: raise ValueError("not able to process more than 1 parameter")    
+    assetTypes = ["outfit", "pickaxe", "backbling", "glider", "shoes", "wrap", "emote", "jam tack", "dynamic bundle", "real money pack", "guitar", "keytar", "microphone"]
+    if assetType and assetType.lower() not in assetTypes:
+        raise ValueError(f"'{assetType}' is not a valid argument {assetTypes}")
+            
+    todayDate = datetime.datetime.now()
+    today = f"{todayDate.year}-{todayDate.month}-{todayDate.day + 1}" if todayDate.hour >= 17 and todayDate.hour <= 23 else f"{todayDate.year}-{todayDate.month}-{todayDate.day}"
+
     
     def legendcolor(row):
         match row["Color"]:
@@ -40,7 +45,6 @@ def print_shop(variants: bool = False, leaving: bool = False, new: bool = False,
     def color(row):
         if row["inDate"] == today and row["outDate"] == today:
             return [colorama.Fore.YELLOW + str(cell) + colorama.Style.RESET_ALL if isinstance(cell, (str)) else cell for cell in row]
-
         elif row["inDate"] == today:
             return [colorama.Fore.GREEN + str(cell) + colorama.Style.RESET_ALL if isinstance(cell, (str)) else cell for cell in row]
         elif row["outDate"] == today:
@@ -80,13 +84,13 @@ def print_shop(variants: bool = False, leaving: bool = False, new: bool = False,
             df = pandas.read_json(StringIO(shop.category(category)))
             dataList = df.apply(color, axis=1).values.tolist()
             print(tabulate.tabulate(dataList, headers=df.columns, tablefmt="grid"))
-        exit()
     elif sections: 
         for section in sorted(shop.sections):
             print("\n"+section+": ")
             df = pandas.read_json(StringIO(shop.section(section)))
             dataList = df.apply(color, axis=1).values.tolist()
             print(tabulate.tabulate(dataList, headers=df.columns, tablefmt="grid"))
+    elif assetType: df = pandas.read_json(StringIO(shop.assetType(assetType.lower())))
     else: df = pandas.DataFrame(shop.parsed)
     
     if not sections:
@@ -94,6 +98,7 @@ def print_shop(variants: bool = False, leaving: bool = False, new: bool = False,
         print(tabulate.tabulate(dataList, headers=df.columns, tablefmt="grid"))
     
     print(f"\nNext Shop Rotation in: {17 - todayDate.hour if todayDate.hour < 17 else 17 + (23 - todayDate.hour)} hours")
+
 @app.command()
 def expand_bundles():
     shop = fs.shop()

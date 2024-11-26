@@ -3,13 +3,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from tqdm import tqdm
-
 import json
 import pandas
 
 import datetime
-import time
 
 class shop:
     options = webdriver.EdgeOptions()
@@ -46,7 +43,7 @@ class shop:
                                     "name" : item.get("title", None).replace("&amp;", "&"),
                                     "category" : category["navLabel"].replace("&amp;", "&"),
                                     "section" : section["displayName"].replace("&amp;", "&"),
-                                    "type" : item["assetType"].replace("dynamicbundle", "dynamic bundle").replace("jamtrack", "jam track").replace("rmtpack", "real money pack").replace("staticbundle", "static bundle"),
+                                    "assetType" : item["assetType"].replace("dynamicbundle", "dynamic bundle").replace("jamtrack", "jam track").replace("rmtpack", "real money pack").replace("staticbundle", "static bundle"),
                                     "price" : (str(item["pricing"]["finalPrice"]) + " V-Bucks") if item["assetType"] != "rmtpack" else "$" + "".join([x for x in str(item["pricing"]["finalPrice"])[:len(str(item["pricing"]["finalPrice"]))-2]]) + "." + str(item["pricing"]["finalPrice"])[-2:],
                                     "inDate" : inDate if inDate == None else inDate.split("T")[0] if "T" in inDate else inDate,
                                     "outDate" : outDate if outDate == None else outDate.split("T")[0] if "T" in outDate else outDate,
@@ -98,7 +95,7 @@ class shop:
                                     "name" : item.get("title", None).replace("&amp;", "&"),
                                     "category" : category["navLabel"].replace("&amp;", "&"),
                                     "section" : section["displayName"].replace("&amp;", "&"),
-                                    "type" : item["assetType"].replace("dynamicbundle", "dynamic bundle").replace("jamtrack", "jam track").replace("rmtpack", "real money pack").replace("staticbundle", "static bundle"),
+                                    "assetType" : item["assetType"].replace("dynamicbundle", "dynamic bundle").replace("jamtrack", "jam track").replace("rmtpack", "real money pack").replace("staticbundle", "static bundle"),
                                     "price" : (str(item["pricing"]["finalPrice"]) + " V-Bucks") if item["assetType"] != "rmtpack" else "$" + "".join([x for x in str(item["pricing"]["finalPrice"])[:len(str(item["pricing"]["finalPrice"]))-2]]) + "." + str(item["pricing"]["finalPrice"])[-2:],
                                     "inDate" : inDate if inDate == None else inDate.split("T")[0] if "T" in inDate else inDate,
                                     "outDate" : outDate if outDate == None else outDate.split("T")[0] if "T" in outDate else outDate,
@@ -132,9 +129,9 @@ class shop:
         df = pandas.DataFrame(self.__parsed)
         return df[df.section == section].to_json(orient="records", index = False)
     
-    def type(self, type: str = "emote") -> dict:
+    def assetType(self, assetType: str = "emote") -> dict:
         df = pandas.DataFrame(self.__parsed)
-        return df[df.type == type].to_json(orient="records", index = False)
+        return df[df.assetType == assetType].to_json(orient="records", index = False)
     
     @property
     def categories(self) -> list:
