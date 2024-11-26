@@ -24,6 +24,9 @@ def print_shop(variants: bool = False, leaving: bool = False, new: bool = False,
     
     if argCount >= 2: raise ValueError("not able to process more than 1 parameter")    
     assetTypes = ["outfit", "pickaxe", "backbling", "glider", "shoes", "wrap", "emote", "jam tack", "dynamic bundle", "real money pack", "guitar", "keytar", "microphone"]
+    if assetType and assetType.lower() == "--help":
+        print(f"Valid arguments: " + colorama.Fore.GREEN + ", ".join(assetTypes) + colorama.Style.RESET_ALL) 
+        exit()
     if assetType and assetType.lower() not in assetTypes:
         raise ValueError(f"'{assetType}' is not a valid argument {assetTypes}")
             
