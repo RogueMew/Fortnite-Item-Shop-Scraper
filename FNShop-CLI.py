@@ -10,6 +10,7 @@ import typer
 import datetime
 import json
 import string
+import os
 
 app = typer.Typer()
 
@@ -193,8 +194,36 @@ def expand_bundles():
             print(f"   └──[ {item}" if bundles[bundle].index(item) == len(bundles[bundle]) - 1 else f"   ├──[ {item}")            
 
 @app.command()
-def archive_wip():
-    pass
+def archive_wip(fileName: str = "Output", outputFolder: str = None, force: bool = False):
+    
+    #Offline Use
+    #shop = fs.shop(True)
+    #file = open("data.json", "r")
+    #shop.RAWdata = file.read()
+    #shop.parsed
+    
+    filepath = os.path.join(outputFolder.replace("/", "\\") if outputFolder else ".", f"{fileName}.json")
+    
+    if outputFolder:
+        if not os.path.exists(os.path.abspath(outputFolder)):
+            os.makedirs(os.path.abspath(outputFolder))
+    if os.path.exists(filepath) and not force:
+        raise FileExistsError(f"'{filepath}' already exists use --force to replace")
+    
+    shop = fs.shop()
+    
+    try:
+        with open(filepath, "w") as file:
+            data = shop.parsed
+            for item in data:
+                item["dateExtracted"] = datetime.datetime.now().strftime("%d-%m-%YT%H:%M")
+            data = json.dumps(data, indent=4)
+            file.write(data)
+        print(f"Data Archived at: {filepath}")
+    except Exception as e:
+        print(f"Failed to Save File: {e}")
+    
+    
 
 if __name__ == "__main__":
     app()
