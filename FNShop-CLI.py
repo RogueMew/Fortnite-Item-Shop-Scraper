@@ -193,7 +193,7 @@ def expand_bundles():
             print(f"   └──[ {item}" if bundles[bundle].index(item) == len(bundles[bundle]) - 1 else f"   ├──[ {item}")            
 
 @app.command()
-def archived():
+def archive_wip():
     pass
 
 if __name__ == "__main__":
