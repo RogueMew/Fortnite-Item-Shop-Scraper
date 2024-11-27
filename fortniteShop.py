@@ -36,8 +36,8 @@ class shop:
                         for offer in section["offerGroups"]:
                             for item in offer["items"]:
                                 
-                                inDate = item.get("inDate", "N/A")
-                                outDate = item.get("outDate", "N/A")
+                                inDate = item.get("inDate", None)
+                                outDate = item.get("outDate", None)
                                 
                                 item_dict = {
                                     "name" : item.get("title", None).replace("&amp;", "&"),
@@ -88,8 +88,8 @@ class shop:
                         for offer in section["offerGroups"]:
                             for item in offer["items"]:
                                 
-                                inDate = item.get("inDate", "N/A")
-                                outDate = item.get("outDate", "N/A")
+                                inDate = item.get("inDate", None)
+                                outDate = item.get("outDate", None)
                                 
                                 item_dict = {
                                     "name" : item.get("title", None).replace("&amp;", "&"),
@@ -113,9 +113,12 @@ class shop:
     
     @property
     def new(self) -> dict:
-        date = datetime.datetime.now()
-        date = f"{date.year}-{date.month}-{str(date.day + 1) if int(date.strftime("%H")) >= 17 and int(date.strftime("%H")) <= 23 else str(date.day)}"
-        
+        now = datetime.datetime.now()
+        if 17 <= now.hour <= 23:
+            date = now + datetime.timedelta(1)
+        else: 
+            date = now
+        date = date.strftime("%Y-%m-%d")
         df = pandas.DataFrame(self.__parsed)
         
         return df[df.inDate == date].to_json(orient="records", index=False)
@@ -144,9 +147,12 @@ class shop:
     
     @property
     def leaving(self) -> dict:
-        date = datetime.datetime.now()
-        date = f"{date.year}-{date.month}-{str(date.day + 1) if int(date.strftime("%H")) >= 17 and int(date.strftime("%H")) <= 23 else str(date.day)}"
-        
+        now = datetime.datetime.now()
+        if 17 <= now.hour <= 23:
+            date = now + datetime.timedelta(1)
+        else: 
+            date = now
+        date = date.strftime("%Y-%m-%d")
         df = pandas.DataFrame(self.__parsed)
         
         return df[df.outDate == date].to_json(orient="records", index = False)
@@ -154,3 +160,17 @@ class shop:
     def varaints(self, hasVaraints: bool = True) -> dict:
         df = pandas.DataFrame(self.__parsed)
         return df[df.hasVariants == hasVaraints].to_json(orient="records")
+    
+    @property
+    def dropin(self) -> dict:
+        now = datetime.datetime.now()
+        if 17 <= now.hour <= 23:
+            date = now + datetime.timedelta(1)
+        else: 
+            date = now
+        
+        date = date.strftime("%Y-%m-%d")
+        
+        df = pandas.DataFrame(self.__parsed)
+        
+        return df[(df.inDate == date) & (df.outDate == date)].to_json(orient="records")
