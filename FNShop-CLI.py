@@ -194,7 +194,7 @@ def expand_bundles():
             print(f"   └──[ {item}" if bundles[bundle].index(item) == len(bundles[bundle]) - 1 else f"   ├──[ {item}")            
 
 @app.command()
-def archive_wip(fileName: str = "Output", outputFolder: str = None, force: bool = False):
+def archive_wip(fileName: str = "Output", outputFolder: str = None, images: bool = False, force: bool = False):
     
     #Offline Use
     #shop = fs.shop(True)
@@ -211,17 +211,21 @@ def archive_wip(fileName: str = "Output", outputFolder: str = None, force: bool 
         raise FileExistsError(f"'{filepath}' already exists use --force to replace")
     
     shop = fs.shop()
-    
-    try:
-        with open(filepath, "w") as file:
-            data = shop.parsed
-            for item in data:
-                item["dateExtracted"] = datetime.datetime.now().strftime("%d-%m-%YT%H:%M")
-            data = json.dumps(data, indent=4)
-            file.write(data)
-        print(f"Data Archived at: {filepath}")
-    except Exception as e:
-        print(f"Failed to Save File: {e}")
+    if not images:
+        try:
+            with open(filepath, "w") as file:
+                data = shop.parsed
+                for item in data:
+                    item["dateExtracted"] = datetime.datetime.now().strftime("%d-%m-%YT%H:%M")
+                data = json.dumps(data, indent=4)
+                file.write(data)
+            print(f"Data Archived at: {filepath}")
+            exit()
+        except Exception as e:
+            print(f"Failed to Save File: {e}")
+            exit()
+  
+        
     
     
 
