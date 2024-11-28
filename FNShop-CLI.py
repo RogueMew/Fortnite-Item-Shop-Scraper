@@ -1,6 +1,9 @@
 import fortniteShop as fs
 import requests as web
 
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver import ActionChains
 from io import StringIO
 
 import colorama
@@ -10,6 +13,9 @@ import typer
 import datetime
 import json
 import string
+import os
+import pyautogui
+import time
 
 app = typer.Typer()
 
@@ -193,8 +199,93 @@ def expand_bundles():
             print(f"   └──[ {item}" if bundles[bundle].index(item) == len(bundles[bundle]) - 1 else f"   ├──[ {item}")            
 
 @app.command()
-def archived():
-    pass
+def archive_wip(fileName: str = "Output", outputFolder: str = None, images: bool = False, force: bool = False):
+    
+    #Offline Use
+    #shop = fs.shop(True)
+    #file = open("data.json", "r")
+    #shop.RAWdata = file.read()
+    #shop.parsed
+    outputFolder = outputFolder.replace("/", "\\") if outputFolder else outputFolder
+    
+    filepath = os.path.join(outputFolder if outputFolder else ".", f"{fileName}.json")
+    
+    if outputFolder:
+        if not os.path.exists(os.path.abspath(outputFolder)):
+            os.makedirs(os.path.abspath(outputFolder))
+    if os.path.exists(filepath) and not force:
+        raise FileExistsError(f"'{filepath}' already exists use --force to replace")
+    
+    shop = fs.shop()
+    if not images:
+        try:
+            with open(filepath, "w") as file:
+                data = shop.parsed
+                for item in data:
+                    item["dateExtracted"] = datetime.datetime.now().strftime("%d-%m-%YT%H:%M")
+                data = json.dumps(data, indent=4)
+                file.write(data)
+            print(f"Data Archived at: {filepath}")
+            exit()
+        except Exception as e:
+            print(f"Failed to Save File: {e}")
+            exit()
+    
+    data = json.loads(shop.RAW)
+    if not data.get("catalog", None):
+        raise KeyError("Missing 'catalog' Key")
+    if not data["catalog"].get("categories", None):
+        raise KeyError("Missing 'categories' Key")
+
+    data = data["catalog"]["categories"]
+    itemShop = []
+    
+    for category in data:
+        for section in category["sections"]:
+            for offer in section["offerGroups"]:
+                for item in offer["items"]:
+                    
+                    inDate = item.get("inDate", None)
+                    outDate = item.get("outDate", None)
+                    
+                    item_dict = {
+                        "name" : item.get("title", None).replace("&amp;", "&"),
+                        "category" : category["navLabel"].replace("&amp;", "&"),
+                        "section" : section["displayName"].replace("&amp;", "&"),
+                        "assetType" : item["assetType"].replace("dynamicbundle", "dynamic bundle").replace("jamtrack", "jam track").replace("rmtpack", "real money pack").replace("staticbundle", "static bundle"),
+                        "price" : (str(item["pricing"]["finalPrice"]) + " V-Bucks") if item["assetType"] != "rmtpack" else "$" + "".join([x for x in str(item["pricing"]["finalPrice"])[:len(str(item["pricing"]["finalPrice"]))-2]]) + "." + str(item["pricing"]["finalPrice"])[-2:],
+                        "inDate" : inDate if inDate == None else inDate.split("T")[0] if "T" in inDate else inDate,
+                        "outDate" : outDate if outDate == None else outDate.split("T")[0] if "T" in outDate else outDate,
+                        "hasVariants" : item.get("hasVariants", None),
+                        "image" : item["image"].get("lg").replace("&amp;", "&") if item.get("image", None) and item["image"].get("lg", None) else None 
+                        
+                    }
+                    itemShop.append(item_dict)
+                    del item_dict
+                
+    
+    with open(filepath, "w") as file:
+        file.write(json.dumps(itemShop, indent=4))
+    
+    if not os.path.exists(os.path.abspath(os.path.join(outputFolder, "images"))):
+        os.makedirs(os.path.abspath(os.path.join(outputFolder, "images")), exist_ok=True)
+    
+    driver = webdriver.Edge()
+    for item in itemShop:
+        imagePath = os.path.join(outputFolder if outputFolder else ".", "images", f"{"".join(char if char not in ["<", ">", ":", "\"", "/", "\\", "|", "?","*"] else "" for char in item["name"]).replace(" ", "-") }.png")
+        if item["image"]: 
+
+            driver.get(item["image"])
+            img = driver.find_element(By.TAG_NAME, "img")
+            #action = ActionChains(driver)
+            #action.move_to_element(img).context_click().perform()
+            pyautogui.hotkey("ctrl", "s")
+            time.sleep(2)
+            pyautogui.write(os.path.abspath(imagePath))
+            pyautogui.press("enter")
+            time.sleep(2)
+
+
 
 if __name__ == "__main__":
     app()
