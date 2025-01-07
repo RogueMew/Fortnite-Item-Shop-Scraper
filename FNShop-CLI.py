@@ -274,14 +274,16 @@ def archive_wip(fileName: str = "Output", outputFolder: str = None, images: bool
     for item in itemShop:
         imagePath = os.path.join(outputFolder if outputFolder else ".", "images", f"{"".join(char if char not in ["<", ">", ":", "\"", "/", "\\", "|", "?","*"] else "" for char in item["name"]).replace(" ", "-") }.png")
         if item["image"]: 
-
-            driver.get(item["image"])
+            if os.path.exists(imagePath):
+                imagePath = os.path.join(outputFolder if outputFolder else ".", "images", f"{"".join(char if char not in ["<", ">", ":", "\"", "/", "\\", "|", "?","*"] else "" for char in item["name"]).replace(" ", "-") }-{item["assetType"].replace(" ", "-")}.png")
+            driver.get(item["image"]) 
             img = driver.find_element(By.TAG_NAME, "img")
             #action = ActionChains(driver)
             #action.move_to_element(img).context_click().perform()
             pyautogui.hotkey("ctrl", "s")
             time.sleep(2)
-            pyautogui.write(os.path.abspath(imagePath))
+            pyautogui.write(os.path.abspath(imagePath), interval=0.05)
+            time.sleep(2)
             pyautogui.press("enter")
             time.sleep(2)
 
